@@ -1,14 +1,16 @@
 <?php
 
-class SanPham {
+class SanPham
+{
     public $conn;
 
     public function __construct()
     {
         $this->conn = connectDB();
     }
-    
-    public function getAllSanPham(){
+
+    public function getAllSanPham()
+    {
         try {
             $sql = "SELECT comics.id, comics.title, comics.author_id, comics.category_id, 
                            comics.publication_date, comics.price, comics.original_price, comics.stock_quantity, comics.image, 
@@ -17,7 +19,7 @@ class SanPham {
                     JOIN authors ON comics.author_id = authors.id
                     JOIN categories ON comics.category_id = categories.id
                     LEFT JOIN comic_sales ON comics.id = comic_sales.comic_id";
-            
+
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -27,7 +29,8 @@ class SanPham {
         }
     }
 
-    public function getAllTacGia(){
+    public function getAllTacGia()
+    {
         try {
             $sql = 'SELECT * FROM authors';
             $stmt = $this->conn->prepare($sql);
@@ -39,11 +42,12 @@ class SanPham {
         }
     }
 
-    public function insertSanPham($title, $author_id, $category_id, $description, $publication_date, $price, $original_price, $stock_quantity, $image) {
+    public function insertSanPham($title, $author_id, $category_id, $description, $publication_date, $price, $original_price, $stock_quantity, $image)
+    {
         try {
             $sql = "INSERT INTO comics (title, author_id, category_id, description, publication_date, price, original_price, stock_quantity, image)
                     VALUES (:title, :author_id, :category_id, :description, :publication_date, :price, :original_price, :stock_quantity, :image)";
-            
+
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':author_id', $author_id);
@@ -54,7 +58,7 @@ class SanPham {
             $stmt->bindParam(':original_price', $original_price);
             $stmt->bindParam(':stock_quantity', $stock_quantity);
             $stmt->bindParam(':image', $image);
-            
+
             if ($stmt->execute()) {
                 echo "Sản phẩm đã được thêm thành công!";
                 return true;
@@ -68,7 +72,8 @@ class SanPham {
         }
     }
 
-    public function getSanPhamById($id) {
+    public function getSanPhamById($id)
+    {
         try {
             $sql = "SELECT * FROM comics WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
@@ -80,7 +85,8 @@ class SanPham {
         }
     }
 
-    public function updateSanPham($id, $title, $author_id, $category_id, $description, $publication_date, $price, $original_price, $stock_quantity, $image) {
+    public function updateSanPham($id, $title, $author_id, $category_id, $description, $publication_date, $price, $original_price, $stock_quantity, $image)
+    {
         try {
             $sql = "UPDATE comics SET 
                         title = :title, 
@@ -93,7 +99,7 @@ class SanPham {
                         stock_quantity = :stock_quantity, 
                         image = :image 
                     WHERE id = :id";
-            
+
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':author_id', $author_id);
@@ -105,7 +111,7 @@ class SanPham {
             $stmt->bindParam(':stock_quantity', $stock_quantity);
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':id', $id);
-    
+
             if ($stmt->execute()) {
                 return true;
             } else {
@@ -118,7 +124,8 @@ class SanPham {
         }
     }
 
-    public function deleteSanPham($id) {
+    public function deleteSanPham($id)
+    {
         try {
             $sql = "DELETE FROM comics WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
@@ -130,7 +137,8 @@ class SanPham {
         }
     }
 
-    public function isProductInOrders($id) {
+    public function isProductInOrders($id)
+    {
         try {
             $sql = "SELECT COUNT(*) FROM order_items WHERE comic_id = :id";
             $stmt = $this->conn->prepare($sql);
@@ -145,5 +153,3 @@ class SanPham {
 }
 
 ?>
-
-
