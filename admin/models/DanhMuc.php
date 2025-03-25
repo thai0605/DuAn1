@@ -1,7 +1,7 @@
 <?php
 class DanhMuc
 {
-    public  $conn;
+    public $conn;
     public function __construct()
     {
         $this->conn = connectDB();
@@ -29,7 +29,7 @@ class DanhMuc
             echo "Error: " . $e->getMessage(); // Display error message
         }
     }
-    
+
 
     public function getDetailDanhMuc($id)
     {

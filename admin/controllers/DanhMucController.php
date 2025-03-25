@@ -43,7 +43,7 @@ class DanhMucController
 
     public function formEditDanhMuc()
     {
-        $id = $_GET['id'] ; // Use null coalescing to handle missing ID
+        $id = $_GET['id']; // Use null coalescing to handle missing ID
 
         if ($id) {
             $danhMuc = $this->modelDanhmuc->getDetailDanhMuc($id);
@@ -64,7 +64,7 @@ class DanhMucController
             $name = $_POST['name'];
             $description = $_POST['description'];
 
-           
+
             if ($this->modelDanhmuc->updateDanhMuc($id, $name, $description)) {
                 $_SESSION['success'] = "Sửa danh mục thành công!";
                 header('Location: ?act=listdm');
@@ -73,10 +73,10 @@ class DanhMucController
                 // echo 'loi';
                 $_SESSION['error'] = "Có lỗi xảy ra khi sửa danh mục!";
 
-            }   
-               
-           
-            
+            }
+
+
+
         }
     }
     public function deleteDanhMuc()

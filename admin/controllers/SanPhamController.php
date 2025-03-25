@@ -1,6 +1,7 @@
 <?php
 
-class SanPhamController {
+class SanPhamController
+{
     public $modelSanPham;
     public $modelDanhMuc;
     public $modelVariants;
@@ -147,7 +148,7 @@ class SanPhamController {
     //         header('Location: ?act=san-pham');
     //         exit();
     //     }
-        
+
     //     $listVariants = $this->modelVariants->getVariantsByComicId($comic_id);
     //     require_once "./views/sanpham/bienthesp.php";
     // }
@@ -155,26 +156,26 @@ class SanPhamController {
     // public function formAddVariant()
     // {
     //     $comic_id = $_GET['comic_id'] ?? null;
-       
-        
+
+
     //     if (!$comic_id) {
     //         $_SESSION['error'] = "Không tìm thấy thông tin sản phẩm";
     //         header('Location: ?act=san-pham');
     //         exit();
     //     }
-        
+
     //     $comic = $this->modelSanPham->getSanPhamById($comic_id);
-        
+
     //     if (!$comic) {
     //         $_SESSION['error'] = "Không tìm thấy thông tin sản phẩm";
     //         header('Location: ?act=san-pham');
     //         exit();
     //     }
-        
+
     //     require_once './views/sanpham/addbienthesp.php';
     // }
-    
-    
+
+
 
     // // Handle POST request to add a new variant
     // public function postAddVariant()
@@ -182,14 +183,14 @@ class SanPhamController {
     //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //         // Debug để kiểm tra dữ liệu POST
     //         // var_dump($_POST); exit;
-            
+
     //         $comic_id = $_POST['comic_id'] ?? '';
     //         if (empty($comic_id)) {
     //             $_SESSION['error'] = "Không tìm thấy thông tin sản phẩm";
     //             header('Location: ?act=san-pham');
     //             exit();
     //         }
-            
+
     //         // Get form data
     //         $format = $_POST['format'] ?? '';
     //         $language = $_POST['language'] ?? '';
@@ -206,7 +207,7 @@ class SanPhamController {
     //             if (!file_exists($uploadDir)) {
     //                 mkdir($uploadDir, 0777, true);
     //             }
-                
+
     //             $fileName = time() . '_' . basename($_FILES['image']['name']);
     //             $uploadFile = $uploadDir . $fileName;
 
@@ -244,7 +245,7 @@ class SanPhamController {
     // public function postEditVariant()
     // {
     //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-           
+
     //         // Get form data
     //         $variantId = $_POST['id'];
     //         $comicId = $_POST['comic_id'];
