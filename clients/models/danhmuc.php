@@ -7,6 +7,8 @@ class Danhmuc{
         $this->conn = connectDB();
     }
 
+
+    
     public function getAllDanhMuc(){
         try {
             $sql = "SELECT * FROM categories ORDER BY name ASC";

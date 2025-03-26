@@ -18,6 +18,8 @@ class   Sanpham {
         }
     }
 
+
+    
     public function getAllSanPhamHot(){
         try {
             $sql = "SELECT 
