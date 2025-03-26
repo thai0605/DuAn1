@@ -149,6 +149,8 @@
     $current_page_products = array_slice($listsp, $start, $items_per_page);
     ?>
 
+
+
     <!-- Product List -->
     <div class="row pb-3">
         <?php if (empty($listsp)): ?>
