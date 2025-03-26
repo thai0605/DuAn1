@@ -1,7 +1,7 @@
 <?php
 
-define('BASE_URL' , 'http://localhost/DuAn1-main/');
-define('BASE_URL_ADMIN' , 'http://localhost/DuAn1-main//admin/');
+define('BASE_URL' , 'http://localhost/du_an_1/');
+define('BASE_URL_ADMIN' , 'http://localhost/du_an_1/admin/');
 
 
 

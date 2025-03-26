@@ -14,6 +14,9 @@ require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
 require_once './controllers/AuthController.php';
 
+
+
+require_once './models/VariantSanPham.php';
 require_once './models/DanhMuc.php';
 require_once './models/Thongke.php';
 require_once './models/SanPham.php';
@@ -28,11 +31,10 @@ if (!in_array($act, $publicRoutes)) {
 }
 
 match ($act) {
-    // '' => !isset($_SESSION['admin_id'])
-    // ? header('Location: ?act=show-login-form')
-    // : $home->views_home(),
+    '' => !isset($_SESSION['admin_id'])
+    ? header('Location: ?act=show-login-form')
+    : $home->views_home(),
     // 'show-login-form' => (new AuthController())->showLoginForm(),
-
     '/' => $home->views_home(),
 
     //danh mục
@@ -42,6 +44,7 @@ match ($act) {
     'form-sua-danh-muc' => (new DanhMucController())->formEditDanhMuc(),
     'sua-danh-muc' => (new DanhMucController())->postEditDanhMuc(),
     'xoa-danh-muc' => (new DanhMucController())->deleteDanhMuc(),
+
     //sanpham
     'san-pham' => (new SanPhamController())->danhSachSanPham(),
     'form-them-san-pham' => (new SanPhamController())->formAddSanPham(),
@@ -50,7 +53,16 @@ match ($act) {
     'sua-san-pham' => (new SanPhamController())->postEditSanPham(),
     'xoa-san-pham' => (new SanPhamController())->postDeleteSanPham(),
 
+    //rou bien the sp
+    'chi-tiet-bien-the-sp' => (new SanPhamController())->danhSachVariants(),
+    'form-them-bien-the' => (new SanPhamController())->formAddVariant(),
+    'them-bien-the' => (new SanPhamController())->postAddVariant(),
+    'form-sua-bien-the' => (new SanPhamController())->formEditVariant(),
+    'sua-bien-the' => (new SanPhamController())->postEditVariant(),
+    'xoa-bien-the' => (new SanPhamController())->postDeleteVariant(),
 
+
+    default => header('Location: ?act=show-login-form')
 };
 
 // Include footer nếu không phải trang login
