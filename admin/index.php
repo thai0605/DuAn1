@@ -5,6 +5,53 @@ require_once '../commons/env.php';
 require_once '../commons/core.php';
 require_once './models/AuthModel.php';
 
+
+$auth = new Auth();
+
+// Thiết lập thời gian timeout session (10 phút = 600 giây)
+$timeout = 600;
+
+// Chỉ kiểm tra timeout nếu đã đăng nhập
+if (isset($_SESSION['admin_id'])) {
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $timeout)) {
+        $auth->logout();
+        exit;
+    }
+    // Cập nhật thời gian hoạt động
+    $_SESSION['last_activity'] = time();
+}
+
+// Lấy action từ URL
+$act = $_GET['act'] ?? '';
+
+// Danh sách các route được phép truy cập khi chưa đăng nhập
+$publicRoutes = ['loginAdmin', 'show-login-form', 'end-session'];
+
+// Kiểm tra xem người dùng đã được xác thực từ trang clients chuyển sang
+if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true && isset($_SESSION['user'])) {
+    // Thiết lập đầy đủ các session cần thiết cho admin
+    $_SESSION['admin_id'] = $_SESSION['user']['id'];
+    $_SESSION['admin_name'] = $_SESSION['user']['name'] ?? '';
+    $_SESSION['admin_role'] = $_SESSION['user']['role'];
+    $_SESSION['is_logged_in'] = true;
+    $_SESSION['admin_logged_in'] = true;
+    $_SESSION['last_activity'] = time();
+    
+    unset($_SESSION['admin_auth']); // Xóa session tạm thời
+    
+    // Chuyển hướng về trang chủ admin
+    header('Location: ?act=/');
+    exit;
+} else {
+    // Kiểm tra đăng nhập
+    if (!isset($_SESSION['admin_id'])) {
+        if (!in_array($act, $publicRoutes)) {
+            header('Location: ?act=show-login-form');
+            exit;
+        }
+    }
+}
+
 // Lấy action từ URL
 $act = $_GET['act'] ?? '';
 $publicRoutes = ['loginAdmin', 'show-login-form', 'end-session'];
@@ -28,10 +75,13 @@ if (!in_array($act, $publicRoutes)) {
 }
 
 match ($act) {
-    // '' => !isset($_SESSION['admin_id'])
-    // ? header('Location: ?act=show-login-form')
-    // : $home->views_home(),
-    // 'show-login-form' => (new AuthController())->showLoginForm(),
+    '' => !isset($_SESSION['admin_id'])
+    ? header('Location: ?act=show-login-form')
+    : $home->views_home(),
+'loginAdmin' => (new AuthController())->login(),
+'show-login-form' => (new AuthController())->showLoginForm(),
+'logout' => $auth->logout(),
+'end-session' => exit(),
 
     '/' => $home->views_home(),
 
@@ -50,7 +100,7 @@ match ($act) {
     'sua-san-pham' => (new SanPhamController())->postEditSanPham(),
     'xoa-san-pham' => (new SanPhamController())->postDeleteSanPham(),
 
-
+    default => header('Location: ?act=show-login-form')
 };
 
 // Include footer nếu không phải trang login
