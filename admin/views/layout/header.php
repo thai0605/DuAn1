@@ -6,215 +6,94 @@ ob_start();
 
 
 ?>
-<!doctype html>
-<!-- [if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang=""> <!--<![endif]-->
-
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>BOOK-STORE</title>
-    <meta name="description" content="BOOK - STORE">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="apple-touch-icon" href="https://imgur.com/ZOy8S6I.png">
-    <link rel="shortcut icon" href="https://imgur.com/ZOy8S6I.png">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
-    <style>
-        #weatherWidget .currentDesc {
-            color: #ffffff !important;
-        }
-
-
-        .traffic-chart {
-            min-height: 335px;
-        }
-
-        #flotPie1 {
-            height: 150px;
-        }
-
-        #flotPie1 td {
-            padding: 3px;
-        }
-
-        #flotPie1 table {
-            top: 20px !important;
-            right: -10px !important;
-        }
-
-        .chart-container {
-            display: table;
-            min-width: 270px;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        #flotLine5 {
-            height: 105px;
-        }
-
-        #flotBarChart {
-            height: 150px;
-        }
-
-        #cellPaiChart {
-            height: 160px;
-        }
-    </style>
-    <script>
-        let isReload = false;
-
-        // Đánh dấu khi reload trang
-        window.onbeforeunload = function() {
-            if (performance.navigation.type === 1) {
-                isReload = true;
-            }
-            if (!isReload) {
-                // Chỉ gửi request kết thúc session khi không phải là reload
-                navigator.sendBeacon('?act=end-session');
-            }
-        };
-
-        // Reset flag khi load trang mới
-        window.onload = function() {
-            isReload = false;
-        };
-    </script>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <link href="dist/css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
-
-
-    <!-- Right Panel -->
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-
-                <div class="navbar-header" style="height:50px ;">
-                    <a class="navbar-brand" href="./"><img src="" alt="Logo" style="width:50px; height:50px; margin-top:-6px ;"></a>
- 
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+    <div id="main-wrapper">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    <a class="navbar-brand" href="http://localhost/DuAn1-main/">
+                        <b class="logo-icon p-l-10">
+                            <img src="assets/images/logo.png" alt="homepage" class="light-logo" style="width: 150px; height: auto; max-height: 50px;" /> 
+                        </b>
+                    </a>
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
                 </div>
-            </div>
-            <div class="top-right">
-                <div class="header-menu">
-                    <div class="header-left">
-                        <button class="search-trigger"><i class="fa fa-search"></i></button>
-                        <div class="form-inline">
-                            <form class="search-form">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
-                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
-                            </form>
-                        </div>
-
-
-                        <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">3</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-check"></i>
-                                    <p>Server #1 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-info"></i>
-                                    <p>Server #2 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-warning"></i>
-                                    <p>Server #3 overloaded.</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="dropdown for-message">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="message" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-envelope"></i>
-                                <span class="count bg-primary">4</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="message">
-                                <p class="red">You have 4 Mails</p>
-                                <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="assets/images/avatar/1.jpg"></span>
-                                    <div class="message media-body">
-                                        <span class="name float-left">Jonathan Smith</span>
-                                        <span class="time float-right">Just now</span>
-                                        <p>Hello, this is an example msg</p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="assets/images/avatar/2.jpg"></span>
-                                    <div class="message media-body">
-                                        <span class="name float-left">Jack Sanders</span>
-                                        <span class="time float-right">5 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="assets/images/avatar/3.jpg"></span>
-                                    <div class="message media-body">
-                                        <span class="name float-left">Cheryl Wheeler</span>
-                                        <span class="time float-right">10 minutes ago</span>
-                                        <p>Hello, this is an example msg</p>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="assets/images/avatar/4.jpg"></span>
-                                    <div class="message media-body">
-                                        <span class="name float-left">Rachel Santos</span>
-                                        <span class="time float-right">15 minutes ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="assets/images/admin.jpg" alt="User Avatar">
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="?act=profile"><i class="fa fa-user"></i>My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-user"></i>Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
-
-                            <a class="nav-link" href="?act=logout">
-                                <i class="fa fa-power-off"></i>Logout
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
+                                <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
                             </a>
-
-                        </div>
-                    </div>
-
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav float-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="font-24 mdi mdi-comment-processing"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown" aria-labelledby="2">
+                                <ul class="list-style-none">
+                                    <li>
+                                        <div class="">
+                                            <a href="javascript:void(0)" class="link border-top">
+                                                <div class="d-flex no-block align-items-center p-10">
+                                                    <span class="btn btn-success btn-circle"><i class="ti-calendar"></i></span>
+                                                    <div class="m-l-10">
+                                                        <h5 class="m-b-0">Event today</h5> 
+                                                        <span class="mail-desc">Just a reminder that event</span> 
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated">
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                                <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
         </header>
-        

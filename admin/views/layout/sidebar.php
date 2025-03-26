@@ -1,62 +1,21 @@
-<aside id="left-panel" class="left-panel">
-    <nav class="navbar navbar-expand-sm navbar-default">
-        <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="menu-item-has-children dropdown" style="margin-top: 20px;">
-                    <a href="<?= BASE_URL_ADMIN ?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa fa-home" style="font-size: 20px; margin-right: 10px;"></i>Trang Chủ
-                    </a>
-                </li>
-                
-                <li class="menu-item-has-children dropdown">
-                    <a href="?act=listdm" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa fa-th-large" style="font-size: 18px; margin-right: 10px;"></i>Danh mục sản phẩm
-                    </a>
-                </li>
-                
-                <li class="menu-item-has-children dropdown">
-                        <a href="?act=san-pham" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                    <i class="menu-icon fa fa-book" style="font-size: 18px; margin-right: 10px;"></i>Sản phẩm
-                    </a>
-                </li>
-                
-                <li class="menu-item-has-children dropdown">
-                    <a href="" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa fa-list-alt" style="font-size: 18px; margin-right: 10px;"></i>Danh sách đơn hàng
-                    </a>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa fa-calendar" style="font-size: 18px; margin-right: 10px;"></i>Quản lí khuyến mãi
-                    </a>
-                </li>
-                
-
-                <li class="menu-item-has-children dropdown">
-                    <a href="">
-                        <i class="menu-icon fa fa-comments" style="font-size: 20px; margin-right: 10px;"></i>Quản lí Bình luận
-                    </a>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="">
-                        <i class="menu-icon fa fa-star" style="font-size: 20px; margin-right: 10px;"></i>Quản lí Đánh giá
-                    </a>
-                </li>
-
-                <li class="menu-item-has-children dropdown">
-                    <a href=""  aria-expanded="false">
-                        <i class="menu-icon fa fa-picture-o" style="font-size: 20px; margin-right: 10px;"></i>Quản lí Banner
-                    </a>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                        <i class="menu-icon fa fa-users" style="font-size: 18px; margin-right: 10px;"></i>Quản lí tài khoản
-                    </a>
-                </li>
-                
-               
+<aside class="left-sidebar" data-sidebarbg="skin5">
+    
+    <div class="scroll-sidebar">
+      
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="p-t-30">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=/" aria-expanded="false"><i class="menu-icon fa fa-home" style="font-size: 20px; margin-right: 10px;"></i><span class="hide-menu">DashBoard</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=listdm" aria-expanded="false"><i class="menu-icon fa fa-th-large" style="font-size: 18px; margin-right: 10px;"></i><span class="hide-menu">Danh Mục Sản Phẩm </span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=san-pham" aria-expanded="false"><i class="menu-icon fa fa-book" style="font-size: 18px; margin-right: 10px;"></i><span class="hide-menu">Sản phẩm</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=order" aria-expanded="false"><i class="menu-icon fa fa-list-alt" style="font-size: 18px; margin-right: 10px;"></i><span class="hide-menu">Danh sách đơn hàng </span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=khuyen-mai" aria-expanded="false"><i class="menu-icon fa fa-calendar" style="font-size: 18px; margin-right: 10px;"></i><span class="hide-menu">Quản Lý Khuyễn Mãi </span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=binh-luan" aria-expanded="false"><i class="menu-icon fa fa-comments" style="font-size: 20px; margin-right: 10px;"></i><span class="hide-menu">Quản Lý Bình Luận </span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=danh-gia" aria-expanded="false"><i class="menu-icon fa fa-star" style="font-size: 20px; margin-right: 10px;"></i><span class="hide-menu">Quản Lý Đánh Giá </span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=giao-dien" aria-expanded="false"> <i class="menu-icon fa fa-picture" style="font-size: 20px; margin-right: 10px;"></i><span class="hide-menu">Quản Lý Banner </span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="?act=user" aria-expanded="false"><i class="menu-icon fa fa-users" style="font-size: 18px; margin-right: 10px;"></i><span class="hide-menu">Quản Lý Tài Khoản </span></a></li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
+        </nav>
+       
+    </div>
+  
 </aside>
