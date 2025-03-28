@@ -9,7 +9,7 @@ class   Sanpham {
 
     private function connectDB(){
         try {
-            return new PDO("mysql:host=localhost;dbname=duan11", "root", "", [
+            return new PDO("mysql:host=localhost;dbname=duan1main", "root", "", [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             ]);
