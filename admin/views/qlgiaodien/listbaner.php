@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="page-wrapper">
     <hr>
     <div class="btn btn-warning">
         <a href="<?php echo BASE_URL_ADMIN . '?act=form-add-banner' ?>">Thêm banner</a>
