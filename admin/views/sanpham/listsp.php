@@ -4,7 +4,7 @@
     <div class="row">
       <?php if (isset($_SESSION['message'])): ?>
         <div class="alert alert-<?= $_SESSION['message']['type'] ?> alert-dismissible fade show" role="alert">
-          <i class="fas fa-<?= $_SESSION['message']['type'] === 'success' ? 'check-circle' : 'exclamation-circle' ?>"></i> 
+          <i class="fas fa-<?= $_SESSION['message']['type'] === 'success' ? 'check-circle' : 'exclamation-circle' ?>"></i>
           <?= $_SESSION['message']['text'] ?>
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -12,22 +12,22 @@
         </div>
         <?php unset($_SESSION['message']); ?>
       <?php endif; ?>
-      <?php if(isset($_SESSION['error'])): ?>
+      <?php if (isset($_SESSION['error'])): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa fa-exclamation-circle"></i> <?= $_SESSION['error'] ?>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+          <i class="fas fa fa-exclamation-circle"></i> <?= $_SESSION['error'] ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
+      <?php endif; ?>
       <div class="col-12">
         <div class="card">
           <div class="card-header">
             <a href="?act=form-them-san-pham">
               <button class="btn btn-success">Thêm sách mới</button>
             </a>
-            
+
           </div>
 
           <div class="card-body">
@@ -54,13 +54,13 @@
                     <td><?= $sanPham['title'] ?></td>
                     <td><?= $sanPham['author_name'] ?? 'Không có tác giả' ?></td>
                     <td><?= $sanPham['category_name'] ?? 'Không có thể loại' ?></td>
-                    
+
                     <td><?= $sanPham['publication_date'] ?></td>
-                    <td><?= (is_numeric($sanPham['sale']) && (!isset($sanPham['sale_start']) || strtotime($sanPham['sale_start']) <= time())) ? 
-                        ($sanPham['sale'] <= 100 ? 
-                            number_format($sanPham['sale'], 0) . '%' : 
-                            number_format($sanPham['sale'], 0, ',', '.') . ' đ') 
-                        : '0' ?></td>
+                    <td><?= (is_numeric($sanPham['sale']) && (!isset($sanPham['sale_start']) || strtotime($sanPham['sale_start']) <= time())) ?
+                      ($sanPham['sale'] <= 100 ?
+                        number_format($sanPham['sale'], 0) . '%' :
+                        number_format($sanPham['sale'], 0, ',', '.') . ' đ')
+                      : '0' ?></td>
                     <td><?= number_format($sanPham['price'], 0, ',', '.') ?> VNĐ</td>
                     <td><?= number_format($sanPham['original_price'], 0, ',', '.') ?> VNĐ</td>
                     <td>
@@ -77,14 +77,15 @@
                       <a href="?act=form-sua-san-pham&id=<?= $sanPham['id'] ?>">
                         <button class="btn btn-warning">Sửa</button>
                       </a>
-                      <a href="?act=xoa-san-pham&id=<?= $sanPham['id'] ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                      <a href="?act=xoa-san-pham&id=<?= $sanPham['id'] ?>"
+                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
                         <button class="btn btn-danger">Xóa</button>
                       </a>
                       <a href="?act=chi-tiet-bien-the-sp&id=<?= $sanPham['id'] ?>">
                         <button class="btn btn-info">Biến thể</button>
                       </a>
                       <!-- Manage Variants Button -->
-                     
+
                     </td>
                   </tr>
                 <?php } ?>
@@ -93,8 +94,9 @@
 
           </div>
           <div class="card-footer">
-           
+
           </div>
+        </div>
       </div>
     </div>
   </div>

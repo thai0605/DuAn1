@@ -20,9 +20,10 @@
               <!-- Tên sản phẩm -->
               <div class="form-group col-6">
                 <label for="title">Tên sản phẩm</label>
-                <input type="text" class="form-control" name="title" value="<?= $comic['title'] ?>" placeholder="Nhập tên sản phẩm">
+                <input type="text" class="form-control" name="title" value="<?= $comic['title'] ?>"
+                  placeholder="Nhập tên sản phẩm">
                 <?php if (isset($errors['title'])): ?>
-                    <p class="text-danger"><?= $errors['title']; ?></p>
+                  <p class="text-danger"><?= $errors['title']; ?></p>
                 <?php endif; ?>
               </div>
 
@@ -38,7 +39,7 @@
                   <?php endforeach; ?>
                 </select>
                 <?php if (isset($errors['author_id'])): ?>
-                    <p class="text-danger"><?= $errors['author_id']; ?></p>
+                  <p class="text-danger"><?= $errors['author_id']; ?></p>
                 <?php endif; ?>
               </div>
 
@@ -54,41 +55,45 @@
                   <?php endforeach; ?>
                 </select>
                 <?php if (isset($errors['category_id'])): ?>
-                    <p class="text-danger"><?= $errors['category_id']; ?></p>
+                  <p class="text-danger"><?= $errors['category_id']; ?></p>
                 <?php endif; ?>
               </div>
 
               <!-- Ngày phát hành -->
               <div class="form-group col-6">
                 <label for="publication_date">Ngày phát hành</label>
-                <input type="date" class="form-control" name="publication_date" value="<?= $comic['publication_date'] ?>" placeholder="Nhập ngày phát hành">
+                <input type="date" class="form-control" name="publication_date"
+                  value="<?= $comic['publication_date'] ?>" placeholder="Nhập ngày phát hành">
                 <?php if (isset($errors['publication_date'])): ?>
-                    <p class="text-danger"><?= $errors['publication_date']; ?></p>
+                  <p class="text-danger"><?= $errors['publication_date']; ?></p>
                 <?php endif; ?>
               </div>
               <!-- Giá bán -->
               <div class="form-group col-6">
                 <label for="price">Giá bán</label>
-                <input type="number" class="form-control" id="price" name="price" value="<?= $comic['price'] ?>" placeholder="Nhập giá sản phẩm">
+                <input type="number" class="form-control" id="price" name="price" value="<?= $comic['price'] ?>"
+                  placeholder="Nhập giá sản phẩm">
                 <?php if (isset($errors['price'])): ?>
-                    <p class="text-danger"><?= $errors['price']; ?></p>
+                  <p class="text-danger"><?= $errors['price']; ?></p>
                 <?php endif; ?>
               </div>
               <!-- Giá niêm yết -->
               <div class="form-group col-6">
                 <label for="original_price">Giá niêm yết</label>
-                <input type="number" class="form-control" id="original_price" name="original_price" value="<?= $comic['original_price']?>" placeholder="Nhập giá sản phẩm">
+                <input type="number" class="form-control" id="original_price" name="original_price"
+                  value="<?= $comic['original_price'] ?>" placeholder="Nhập giá sản phẩm">
                 <?php if (isset($errors['original_price'])): ?>
-                    <p class="text-danger"><?= $errors['original_price']; ?></p>
+                  <p class="text-danger"><?= $errors['original_price']; ?></p>
                 <?php endif; ?>
               </div>
 
               <!-- Số lượng -->
               <div class="form-group col-6">
                 <label for="stock_quantity">Số lượng</label>
-                <input type="number" class="form-control" name="stock_quantity" value="<?= $comic['stock_quantity'] ?>" placeholder="Nhập số lượng sản phẩm">
+                <input type="number" class="form-control" name="stock_quantity" value="<?= $comic['stock_quantity'] ?>"
+                  placeholder="Nhập số lượng sản phẩm">
                 <?php if (isset($errors['stock_quantity'])): ?>
-                    <p class="text-danger"><?= $errors['stock_quantity']; ?></p>
+                  <p class="text-danger"><?= $errors['stock_quantity']; ?></p>
                 <?php endif; ?>
               </div>
 
@@ -98,23 +103,24 @@
                 <input type="file" class="form-control" name="image">
                 <!-- Display current image -->
                 <?php if ($comic['image']): ?>
-                    <div>
-                        <p>Hình ảnh hiện tại:</p>
-                        <img src="<?= $comic['image'] ?>" alt="Current Image" style="max-width: 100px; height: auto;">
-                    </div>
+                  <div>
+                    <p>Hình ảnh hiện tại:</p>
+                    <img src="<?= $comic['image'] ?>" alt="Current Image" style="max-width: 100px; height: auto;">
+                  </div>
                 <?php endif; ?>
-                <input type="hidden" name="old_image" value="<?= $comic['image'] ?>"> 
+                <input type="hidden" name="old_image" value="<?= $comic['image'] ?>">
                 <?php if (isset($errors['image'])): ?>
-                    <p class="text-danger"><?= $errors['image']; ?></p>
+                  <p class="text-danger"><?= $errors['image']; ?></p>
                 <?php endif; ?>
               </div>
 
               <!-- Mô tả -->
               <div class="form-group col-12">
                 <label for="description">Mô tả</label>
-                <textarea name="description" class="form-control" placeholder="Nhập mô tả"><?= $comic['description'] ?></textarea>
+                <textarea name="description" class="form-control"
+                  placeholder="Nhập mô tả"><?= $comic['description'] ?></textarea>
                 <?php if (isset($errors['description'])): ?>
-                    <p class="text-danger"><?= $errors['description']; ?></p>
+                  <p class="text-danger"><?= $errors['description']; ?></p>
                 <?php endif; ?>
               </div>
 

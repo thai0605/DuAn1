@@ -29,7 +29,6 @@ match ($act) {
     'sanpham' => (new HomeController())->sanpham(),
     'search' =>(new HomeController())->search(),
     'lienhe' =>(new HomeController())->lienhe(),
-    
 
 };
 

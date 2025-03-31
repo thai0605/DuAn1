@@ -15,13 +15,6 @@ if (!empty($sanphamCT)): ?>
 
         <div class="col-lg-7 pb-5">
             <h3 class="font-weight-semi-bold"><?= $sanphamCT['title'] ?? '' ?></h3>
-
-
-
-
-
-
-
             <div class="product-details mb-4">
                 <?php if (!empty($sanphamCT['variants'])): ?>
                     <div class="variants-container">

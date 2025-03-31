@@ -13,7 +13,7 @@ require_once './controllers/DanhMucController.php';
 require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
 require_once './controllers/AuthController.php';
-
+require_once './controllers/GiaodienController.php';
 
 
 require_once './models/VariantSanPham.php';
@@ -21,7 +21,7 @@ require_once './models/DanhMuc.php';
 require_once './models/Thongke.php';
 require_once './models/SanPham.php';
 require_once './models/AuthModel.php';
-
+require_once './models/AdminBanner.php';
 $home = new HomeController();
 
 // // Include header nếu không phải trang login
@@ -61,6 +61,14 @@ match ($act) {
     'sua-bien-the' => (new SanPhamController())->postEditVariant(),
     'xoa-bien-the' => (new SanPhamController())->postDeleteVariant(),
 
+    //banner
+    'giao-dien' => (new AdminGiaodienController())->listBanner(),
+    'form-add-banner' => (new AdminGiaodienController())->formaddBanner(),
+    'add-banner' => (new AdminGiaodienController())->postaddBanner(),
+    'toggle-banner-status' => (new AdminGiaodienController())->UpdataBannerStatus(),
+    'delete-banner' => (new AdminGiaodienController())->deleteBanner(),
+    'form-edit-banner' => (new AdminGiaodienController())->formEditBanner(),
+    'edit-banner' => (new AdminGiaodienController())->postEditBanner(),
 
     // default => header('Location: ?act=show-login-form')
 };

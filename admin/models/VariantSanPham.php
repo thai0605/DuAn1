@@ -1,6 +1,7 @@
 <?php
 
-class Variant {
+class Variant
+{
     public $conn;
 
     public function __construct()
@@ -8,8 +9,9 @@ class Variant {
         $this->conn = connectDB();  // Ensure this function connects to your database
     }
 
-    
-    public function getVariantsByComicId($comicId) {
+
+    public function getVariantsByComicId($comicId)
+    {
         try {
             $sql = "SELECT comic_variants.*,
             (SELECT sale_value 
@@ -18,7 +20,7 @@ class Variant {
              LIMIT 1) AS sale
             FROM comic_variants
             WHERE comic_variants.comic_id = :comic_id";
-    
+
 
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':comic_id' => $comicId]);
@@ -28,14 +30,15 @@ class Variant {
             return false;
         }
     }
-    
+
 
     // Insert a new variant for a specific comic
-    public function insertVariant($comic_id, $format, $language, $isbn, $original_price, $price, $stock_quantity, $publication_date, $image) {
+    public function insertVariant($comic_id, $format, $language, $isbn, $original_price, $price, $stock_quantity, $publication_date, $image)
+    {
         try {
             $sql = "INSERT INTO comic_variants (comic_id, format, language, isbn, original_price, price, stock_quantity, publication_date, image)
                     VALUES (:comic_id, :format, :language, :isbn, :original_price, :price, :stock_quantity, :publication_date, :image)";
-            
+
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
                 ':comic_id' => $comic_id,
@@ -55,7 +58,8 @@ class Variant {
     }
 
     // Get variant by ID
-    public function getVariantById($id) {
+    public function getVariantById($id)
+    {
         try {
             $sql = "SELECT * FROM comic_variants WHERE id = :id";
             $stmt = $this->conn->prepare($sql);
@@ -68,7 +72,8 @@ class Variant {
     }
 
     // Update an existing variant
-    public function updateVariant($id, $comic_id, $format, $language, $isbn, $original_price, $price, $stock_quantity, $publication_date, $image) {
+    public function updateVariant($id, $comic_id, $format, $language, $isbn, $original_price, $price, $stock_quantity, $publication_date, $image)
+    {
         try {
             $sql = "UPDATE comic_variants SET 
                         comic_id = :comic_id, 
@@ -81,7 +86,7 @@ class Variant {
                         publication_date = :publication_date,
                         image = :image
                     WHERE id = :id";
-            
+
             $stmt = $this->conn->prepare($sql);
             return $stmt->execute([
                 ':id' => $id,
@@ -102,7 +107,8 @@ class Variant {
     }
 
     // Delete a product variant by ID
-    public function deleteVariant($id) {
+    public function deleteVariant($id)
+    {
         try {
             // First, get the variant details to access the image path
             $variant = $this->getVariantById($id);
@@ -136,7 +142,8 @@ class Variant {
     }
 
     //
-    public function getIdVariants() {
+    public function getIdVariants()
+    {
         try {
             $sql = "SELECT v.*, c.title as comic_title FROM comic_variants v
                     LEFT JOIN comics c ON v.comic_id = c.id";
