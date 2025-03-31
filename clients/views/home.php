@@ -1,4 +1,367 @@
 
+<<<<<<< HEAD
+=======
+<!-- Products Start -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Sách Hot</span></h2>
+    </div>
+    <div class="position-relative">
+        <!-- Wrapper sản phẩm -->
+        <div class="products-container overflow-hidden" style="position: relative; width: 100%;">
+            <div class="products-wrapper d-flex" style="transition: transform 0.5s ease;">
+            
+                <?php
+                $displayed_products = array();
+                foreach ($sanphams_hot as $sanpham):
+                    
+                    if (in_array($sanpham['id'], $displayed_products)) continue;
+                    $displayed_products[] = $sanpham['id'];
+                ?>
+                    <a href="?act=chitietsp&id=<?php echo $sanpham['id'] ?>" class="text-decoration-none text-dark">
+                        <div class="product-card" style="flex: 0 0 20%; max-width: 20%; padding: 0 10px; box-sizing: border-box;">
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <?php if (!empty($sanpham['sale_value'])): ?>
+                                        <div class="position-absolute bg-danger text-white p-1" style="top: 0; left: 0; font-size: 0.9rem; z-index: 1;">
+                                            <?php
+                                            if ($sanpham['sale_value'] < 100) {
+                                                echo '-' . number_format($sanpham['sale_value'], 0) . '%';
+                                            } else {
+                                                echo '-' . number_format($sanpham['sale_value'], 0, ',', '.') . ' đ';
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <img class="img-fluid w-100" src="<?php  echo removeFirstChar($sanpham['image']) ?>" alt="" style="width: 50%; height: auto;">
+                                </div>
+
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3"><?php echo $sanpham['title'] ?></h6>
+                                    
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class=" text-danger small-price">
+                                            <?php
+                                            $original_price = $sanpham['original_price'];
+                                            $final_price = $original_price;
+                                            $has_discount = false;
+
+                                            // Kiểm tra giảm giá theo phần trăm hoặc giảm giá cố định
+                                            if (!empty($sanpham['sale_value'])) {
+                                                $has_discount = true;
+                                                if ($sanpham['sale_value'] < 100) {
+                                                    // Giảm giá theo phần trăm
+                                                    $final_price -= ($original_price * $sanpham['sale_value'] / 100);
+                                                } else {
+                                                    // Giảm giá theo số tiền cố định
+                                                    $final_price -= $sanpham['sale_value'];
+                                                }
+                                            }
+
+                                            echo number_format(max($final_price, 0), 0, ',', '.'); // Đảm bảo giá không âm
+                                            ?> đ
+                                        </h5>
+                                        <?php if ($has_discount): ?>
+                                            <h6 class="text-muted ml-2"><del><?php echo number_format($original_price, 0, ',', '.') ?> đ</del></h6>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-center bg-light border">
+                                    <a href="?act=chitietsp&id=<?php echo $sanpham['id'] ?>" class="btn btn-sm text-dark p-0">
+                                        Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach ?>
+            </div>
+        </div>
+
+        <!-- Nút điều hướng -->
+        <button class="btn-carousel btn-left">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="btn-carousel btn-right">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+<!-- Products End -->
+
+
+
+
+
+<!-- Featured Start -->
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5 pb-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="d-flex align-items-center border mb-4" style="padding: 30px;">
+                <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured End -->
+
+
+
+
+<!-- Products Start -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Sách Mới</span></h2>
+    </div>
+    <div class="position-relative">
+        <!-- Wrapper sản phẩm -->
+        <div class="products-container overflow-hidden" style="position: relative; width: 100%;">
+            <div class="products-wrapper d-flex" style="transition: transform 0.5s ease;">
+                <?php
+                $displayed_products = array(); // Mảng lưu ID các sản phẩm đã hiển thị
+                usort($sanphamnew, function ($a, $b) {
+                    return strtotime($b['created_at']) - strtotime($a['created_at']);
+                });
+
+                foreach ($sanphamnew as $sp):
+                    if (in_array($sp['id'], $displayed_products)) continue;
+                    $displayed_products[] = $sp['id'];
+                ?>
+                    <a href="?act=chitietsp&id=<?php echo $sp['id'] ?>" class="text-decoration-none text-dark">
+                        <div class="product-card" style="flex: 0 0 20%; max-width: 20%; padding: 0 10px; box-sizing: border-box;">
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <?php if (!empty($sp['sale_value'])): ?>
+                                        <div class="position-absolute bg-danger text-white p-1" style="top: 0; left: 0; font-size: 0.9rem; z-index: 1;">
+                                            <?php
+                                            if ($sp['sale_value'] < 100) {
+                                                echo '-' . number_format($sp['sale_value'], 0) . '%';
+                                            } else {
+                                                echo '-' . number_format($sp['sale_value'], 0, ',', '.') . ' đ';
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <img class="img-fluid w-100" src="<?php echo removeFirstChar($sp['image']) ?>" alt="" >
+                                </div>
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3"><?php echo $sp['title'] ?></h6>
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="text-danger small-price">
+                                            <?php
+                                            $original_price = $sp['original_price'];
+                                            $final_price = $original_price;
+                                            $has_discount = false;
+
+                                            if (!empty($sp['sale_value'])) {
+                                                $has_discount = true;
+                                                if ($sp['sale_value'] < 100) {
+                                                    $final_price -= ($original_price * $sp['sale_value'] / 100);
+                                                } else {
+                                                    $final_price -= $sp['sale_value'];
+                                                }
+                                            }
+
+                                            echo number_format(max($final_price, 0), 0, ',', '.'); // Đảm bảo giá không âm
+                                            ?> đ
+                                        </h5>
+                                        <?php if ($has_discount): ?>
+                                            <h6 class="text-muted ml-2"><del><?php echo number_format($original_price, 0, ',', '.') ?> đ</del></h6>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-center bg-light border">
+                                    <a href="?act=chitietsp&id=<?php echo $sp['id'] ?>" class="btn btn-sm text-dark p-0">
+                                        Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach ?>
+            </div>
+        </div>
+
+        <!-- Nút điều hướng -->
+        <button class="btn-carousel btn-left">
+    <i class="fas fa-chevron-left"></i>
+</button>
+<button class="btn-carousel btn-right">
+    <i class="fas fa-chevron-right"></i>
+</button>
+    </div>
+</div>
+
+
+
+
+
+<!-- Offer Start -->
+<div class="container-fluid offer pt-5">
+    <div class="row px-xl-5">
+        <div class="col-md-6 pb-4">
+            <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+                <img src="clients/assets/img/offer-1.png"  alt="">
+                <div class="position-relative" style="z-index: 1;">
+                    <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                    <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
+                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 pb-4">
+            <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
+                <img src="clients/assets/img/offer-2.png"  alt="">
+                <div class="position-relative" style="z-index: 1;">
+                    <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                    <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
+                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Products Start -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Sách Siêu Ưu Đãi</span></h2>
+    </div>
+</div>
+<!-- Products End -->
+
+
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const productContainers = document.querySelectorAll('.products-container');
+    
+    productContainers.forEach(container => {
+        const wrapper = container.querySelector('.products-wrapper');
+        const btnLeft = container.parentElement.querySelector('.btn-left');
+        const btnRight = container.parentElement.querySelector('.btn-right');
+        
+        // Ngăn chặn kéo hình ảnh
+        wrapper.querySelectorAll('img').forEach(img => {
+            img.addEventListener('dragstart', (e) => e.preventDefault());
+            img.style.pointerEvents = 'none'; // Vô hiệu hóa tương tác chuột với hình ảnh
+        });
+
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+        let momentum = 0;
+        let animationId;
+
+        // Mouse events với momentum scrolling
+        wrapper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            wrapper.classList.add('dragging');
+            startX = e.pageX;
+            scrollLeft = wrapper.scrollLeft;
+            momentum = 0;
+            cancelAnimationFrame(animationId);
+            e.preventDefault(); // Ngăn chặn hành vi mặc định
+        });
+
+        wrapper.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            const x = e.pageX;
+            const delta = (startX - x);
+            wrapper.scrollLeft = scrollLeft + delta;
+            
+            momentum = delta * 0.1;
+            startX = x;
+            scrollLeft = wrapper.scrollLeft;
+        });
+
+        // Thêm event listener cho document để xử lý mouseup bên ngoài wrapper
+        document.addEventListener('mouseup', finishDragging);
+        document.addEventListener('mouseleave', finishDragging);
+
+        function finishDragging() {
+            if (!isDragging) return;
+            isDragging = false;
+            wrapper.classList.remove('dragging');
+
+            function momentumScroll() {
+                if (Math.abs(momentum) > 0.1) {
+                    wrapper.scrollLeft += momentum;
+                    momentum *= 0.95;
+                    animationId = requestAnimationFrame(momentumScroll);
+                }
+            }
+            momentumScroll();
+        }
+
+        // Button navigation với animation mượt
+        btnLeft.addEventListener('click', () => {
+            const scrollAmount = wrapper.offsetWidth * 0.8;
+            smoothScroll(wrapper, -scrollAmount);
+        });
+
+        btnRight.addEventListener('click', () => {
+            const scrollAmount = wrapper.offsetWidth * 0.8;
+            smoothScroll(wrapper, scrollAmount);
+        });
+
+        function smoothScroll(element, amount) {
+            const start = element.scrollLeft;
+            const target = start + amount;
+            const duration = 500; // ms
+            const startTime = performance.now();
+
+            function animation(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function for smoother animation
+                const easeProgress = 1 - Math.pow(1 - progress, 4);
+                
+                element.scrollLeft = start + (amount * easeProgress);
+
+                if (progress < 1) {
+                    requestAnimationFrame(animation);
+                }
+            }
+
+            requestAnimationFrame(animation);
+        }
+    });
+});
+</script>
+
+
+
+
+>>>>>>> bd029987fa0ff632ff538b73952f904dfe840f1c
 <style>
     .btn-carousel {
         position: absolute;
