@@ -168,7 +168,8 @@
                                     -<?php echo number_format($sp['sale_value'], 0); ?>%
                                 </div>
                             <?php endif; ?>
-                            <img class="img-fluid w-100" src="<?php echo removeFirstChar($sp['image']); ?>" alt="">
+                            <img class="img-fluid custom-img" src="<?php echo removeFirstChar($sp['image']) ?>" alt="">
+
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3"><?php echo htmlspecialchars($sp['title']); ?></h6>
@@ -254,3 +255,11 @@
 <!-- Shop Product End -->
     </div>
 </div>
+<style>
+    .custom-img {
+    width: 200px;  /* Hoặc kích thước mong muốn */
+    height: 200px;
+    object-fit: cover; /* Cắt ảnh để vừa khung mà không bị méo */
+}
+
+</style>

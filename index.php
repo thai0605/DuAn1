@@ -1,5 +1,8 @@
 <?php
 session_start();
+session_unset();
+session_destroy();
+
 require_once './commons/core.php';
 
 // Tạo đối tượng PDO
@@ -24,7 +27,8 @@ match ($act) {
     '/' => (new HomeController())->home(),
     'chitietsp' => (new HomeController())->chitietsanpham(),
     'sanpham' => (new HomeController())->sanpham(),
-// 'view-shopping-cart' => (new CartController())->view_shoppingCart(),
+    'search' =>(new HomeController())->search(),
+    'lienhe' =>(new HomeController())->lienhe(),
 
 };
 

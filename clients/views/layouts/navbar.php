@@ -21,25 +21,30 @@ $listdm = $modelDanhMuc->getAllDanhMuc();
 </html>
 <div class="container-fluid mb-5">
     <div class="row border-top px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
-            <div class="category-dropdown">
-                <button class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
-                    onclick="toggleMenu()"
-                    style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Danh mục sản phẩm</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </button>
-                <nav class="position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0" id="category-menu" style="display: none;">
-                    <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
-                        <?php foreach ($listdm as $danhmuc): ?>
-                            <a href="<?php echo $danhmuc['id']; ?>" class="nav-item nav-link">
-                                <?php echo $danhmuc['name']; ?>
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                </nav>
-            </div>
+    <div class="col-lg-3 d-none d-lg-block">
+    <div class="category-dropdown position-relative">
+        <!-- Nút mở menu -->
+        <button class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+            onclick="toggleMenu()"
+            style="height: 65px; margin-top: -1px; padding: 0 30px;">
+            <h6 class="font-weight-semi-bold m-0">Danh mục</h6>
+            <i class="fa fa-angle-down"></i>
+        </button>
+        
+        <!-- Danh mục sản phẩm -->
+        <div id="categoryMenu" class="nav flex-column bg-white border position-absolute w-100"
+            style="display: none; top: 100%; left: 0; z-index: 1000;">
+            <a href="?act=sanpham" 
+               class="nav-item nav-link <?= empty($_GET['category_id']) ? 'active' : '' ?>">Tất cả danh mục</a>
+            <?php foreach ($listDanhMuc as $danhmuc): ?>
+                <a href="?act=search&category_id=<?= $danhmuc['id']; ?>" 
+                   class="nav-item nav-link <?= (isset($_GET['category_id']) && $_GET['category_id'] == $danhmuc['id']) ? 'active' : '' ?>">
+                    <?= htmlspecialchars($danhmuc['name']); ?>
+                </a>
+            <?php endforeach; ?>
         </div>
+    </div>
+</div>
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                 <a href="?act=/" class="text-decoration-none d-block d-lg-none">
@@ -143,23 +148,14 @@ $listdm = $modelDanhMuc->getAllDanhMuc();
 <!-- Navbar End -->
 
 <script>
-    function toggleMenu() {
-        $('#category-menu').slideToggle();
+function toggleMenu() {
+    var menu = document.getElementById("categoryMenu");
+    if (menu.style.display === "none" || menu.style.display === "") {
+        menu.style.display = "block";
+    } else {
+        menu.style.display = "none";
     }
-
-    // Đóng menu khi click ra ngoài
-    document.addEventListener('click', function(event) {
-        var menu = document.getElementById('category-menu');
-        var button = event.target.closest('.category-dropdown button');
-        var isClickInside = event.target.closest('.category-dropdown');
-
-        if (!isClickInside && menu.style.display === 'block') {
-            menu.style.display = 'none';
-        }
-        if (button) {
-            event.stopPropagation();
-        }
-    });
+}
 </script>
 
 <style>
@@ -174,4 +170,7 @@ $listdm = $modelDanhMuc->getAllDanhMuc();
         top: 100%;
         left: 0;
     }
+    .nav-item.nav-link {
+    color: black !important;
+}
 </style>

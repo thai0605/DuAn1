@@ -3,6 +3,7 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="" sizes="16x16" href="clients/assets/logo/logo.png">
     <title>Book-Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" href="assets/logo/logo.png">

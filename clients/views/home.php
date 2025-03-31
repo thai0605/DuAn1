@@ -32,7 +32,7 @@
                                         </div>
                                     <?php endif; ?>
                                     
-                                    <img class="img-fluid w-100" src="<?php  echo removeFirstChar($sanpham['image']) ?>" alt="" style="width: 50%; height: auto;">
+                                    <img class="img-fluid custom-img" src="<?php echo removeFirstChar($sanpham['image']) ?>" alt="">
                                 </div>
 
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -160,7 +160,7 @@
                                             ?>
                                         </div>
                                     <?php endif; ?>
-                                    <img class="img-fluid w-100" src="<?php echo removeFirstChar($sp['image']) ?>" alt="" >
+                                    <img class="img-fluid custom-img" src="<?php echo removeFirstChar($sp['image']) ?>" alt="" >
                                 </div>
                                 <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                     <h6 class="text-truncate mb-3"><?php echo $sp['title'] ?></h6>
@@ -479,6 +479,12 @@ document.addEventListener('DOMContentLoaded', () => {
         -o-user-drag: none;
         -user-drag: none;
     }
+    .custom-img {
+    width: 200px;  /* Hoặc kích thước mong muốn */
+    height: 200px;
+    object-fit: cover; /* Cắt ảnh để vừa khung mà không bị méo */
+}
+
 
 </style>
 
