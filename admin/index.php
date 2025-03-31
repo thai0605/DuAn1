@@ -5,9 +5,9 @@ require_once '../commons/env.php';
 require_once '../commons/core.php';
 require_once './models/AuthModel.php';
 
-// Lấy action từ URL
+// // Lấy action từ URL
 $act = $_GET['act'] ?? '';
-$publicRoutes = ['loginAdmin', 'show-login-form', 'end-session'];
+// $publicRoutes = ['loginAdmin', 'show-login-form', 'end-session'];
 
 require_once './controllers/DanhMucController.php';
 require_once './controllers/HomeController.php';
@@ -24,16 +24,16 @@ require_once './models/AuthModel.php';
 
 $home = new HomeController();
 
-// Include header nếu không phải trang login
-if (!in_array($act, $publicRoutes)) {
+// // Include header nếu không phải trang login
+// if (!in_array($act, $publicRoutes)) {
     include_once "./views/layout/header.php";
     include_once "./views/layout/sidebar.php";
-}
+// }
 
 match ($act) {
-    '' => !isset($_SESSION['admin_id'])
-    ? header('Location: ?act=show-login-form')
-    : $home->views_home(),
+    // '' => !isset($_SESSION['admin_id'])
+    // ? header('Location: ?act=show-login-form')
+    // : $home->views_home(),
     // 'show-login-form' => (new AuthController())->showLoginForm(),
     '/' => $home->views_home(),
 
@@ -62,10 +62,10 @@ match ($act) {
     'xoa-bien-the' => (new SanPhamController())->postDeleteVariant(),
 
 
-    default => header('Location: ?act=show-login-form')
+    // default => header('Location: ?act=show-login-form')
 };
 
 // Include footer nếu không phải trang login
-if (!in_array($act, $publicRoutes)) {
+// if (!in_array($act, $publicRoutes)) {
     include_once "./views/layout/footer.php";
-}
+// }

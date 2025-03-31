@@ -1,5 +1,6 @@
 
-<div class="content">
+
+<div class="page-wrapper">
     <!-- Animated -->
     <div class="animated fadeIn">
         <!-- Widgets  -->
@@ -292,3 +293,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+</div>
+</div>

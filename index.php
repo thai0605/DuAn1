@@ -1,9 +1,12 @@
 <?php
 session_start();
+session_unset();
+session_destroy();
+
 require_once './commons/core.php';
 
 // Tạo đối tượng PDO
-$pdo = new PDO('mysql:host=localhost;dbname=duan11', 'root', '');
+$pdo = new PDO('mysql:host=localhost;dbname=duan1main', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 require_once './commons/env.php';
@@ -24,7 +27,9 @@ match ($act) {
     '/' => (new HomeController())->home(),
     'chitietsp' => (new HomeController())->chitietsanpham(),
     'sanpham' => (new HomeController())->sanpham(),
-    // 'view-shopping-cart' => (new CartController())->view_shoppingCart(),
+    'search' =>(new HomeController())->search(),
+    'lienhe' =>(new HomeController())->lienhe(),
+    
 
 };
 

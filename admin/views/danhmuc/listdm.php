@@ -1,15 +1,4 @@
-<div class="container-fluid">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <div class="row mb-4">
-      <div class="col-md-6">
-        <h3>Danh Mục Sản Phẩm</h3>
-      </div>
-    </div>
-  </section>
-
-  <!-- Main content -->
-  <section class="content">
+<div class="page-wrapper">
     <?php if (isset($_SESSION['error'])): ?>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="fas fa fa-exclamation-circle"></i> <?= htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8') ?>
@@ -78,7 +67,5 @@
       </div>
       <!-- /.col -->
     </div>
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
+   
 </div>

@@ -1,14 +1,6 @@
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h2>Quản lý Sản Phẩm </h2>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="content">
+
+<div class="page-wrapper">
   <div class="container-fluid">
     <div class="row">
       <?php if (isset($_SESSION['message'])): ?>
@@ -107,5 +99,6 @@
       </div>
     </div>
   </div>
-</section>
+</div>
+</div>
 
