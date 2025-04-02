@@ -17,7 +17,7 @@ class AuthController
             header('Location: ./');
             exit;
         }
-        // require_once './views/login.php';
+        require_once './views/login.php';
     }
 
     public function login()

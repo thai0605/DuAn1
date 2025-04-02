@@ -11,11 +11,15 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 require_once './commons/env.php';
 
+require_once './clients/controllers/LoginController.php';
+require_once './clients/controllers/AccountController.php';
 require_once './clients/controllers/HomeController.php';
 
 require_once './clients/models/banner.php';
 require_once './clients/models/danhmuc.php';
 require_once './clients/models/sanpham.php';
+require_once './clients/models/Login.php';
+require_once './clients/models/Account.php';
 
 $act = $_GET['act'] ?? '/';
 $publicRoutes = ['login', 'register'];
@@ -29,6 +33,9 @@ match ($act) {
     'sanpham' => (new HomeController())->sanpham(),
     'search' =>(new HomeController())->search(),
     'lienhe' =>(new HomeController())->lienhe(),
+    'login' => (new LoginController())->login(),
+    'logout' => (new LoginController())->logout(),
+    'register' => (new LoginController())->register(),
 
 };
 
