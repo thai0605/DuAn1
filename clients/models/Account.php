@@ -26,22 +26,38 @@ class User {
             $sql = "UPDATE users 
                     SET name = :name, 
                         email = :email, 
-                        phone = :phone,
-                        updated_at = NOW() 
-                    WHERE id = :id";
+                        phone = :phone, 
+                        updated_at = NOW()";
             
+            // Nếu có ảnh mới, thêm vào câu lệnh SQL
+            if (!empty($data['avatar'])) {
+                $sql .= ", avatar = :avatar";
+            }
+            
+            $sql .= " WHERE id = :id";
+    
             $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute([
+    
+            // Mảng dữ liệu để cập nhật
+            $params = [
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
                 'id' => $userId
-            ]);
+            ];
+    
+            // Nếu có ảnh, thêm vào params
+            if (!empty($data['avatar'])) {
+                $params['avatar'] = $data['avatar'];
+            }
+    
+            return $stmt->execute($params);
         } catch (PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
     }
+    
 
     public function updatePassword($userId, $newPassword) {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);

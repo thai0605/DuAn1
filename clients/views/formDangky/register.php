@@ -1,94 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./clients/assets/css/loginclient.css">
+    <title>Register - Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <title>Welcome!</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: none;
+        }
+        .background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .form-control {
+            border-radius: 10px;
+        }
+        .btn-custom {
+            background-color: #764ba2;
+            color: #fff;
+            border-radius: 10px;
+        }
+        .btn-custom:hover {
+            background-color: #5a3d88;
+        }
+    </style>
 </head>
-
 <body>
+    <img src="./clients/assets/img/book.jpg" alt="Background" class="background-img">
     <div class="container">
-        <div class="forms-container">
-            <div class="signin-signup">
-                <!-- Form đăng nhập -->
-
-                <form action="?act=register" method="POST" class="sign-in-form">
-                    <?php
-                    // Hiển thị thông báo lỗi nếu có
-                    if (isset($_SESSION['error'])) {
-                        echo "<p style='color: red; text-align: center;'>" . $_SESSION['error'] . "</p>";
-                        unset($_SESSION['error']); // Xóa thông báo sau khi hiển thị
-                    }
-
-                    // Hiển thị thông báo thành công nếu có
-                    if (isset($_SESSION['success'])) {
-                        echo "<p style='color: green; text-align: center;'>" . $_SESSION['success'] . "</p>";
-                        unset($_SESSION['success']); // Xóa thông báo sau khi hiển thị
-                    }
-                    ?>
-                    <h2 class="title">Đăng Ký</h2>
-                    <div class="input-field">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="name" placeholder="Username" required>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="text-center">
+                        <h3 class="mb-3">Đăng Ký</h3>
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Email" required>
+                    <form action="?act=register" method="POST">
+                        <?php if (isset($_SESSION['error'])): ?>
+                            <div class="alert alert-danger text-center">
+                                <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['success'])): ?>
+                            <div class="alert alert-success text-center">
+                                <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter your username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input type="text" name="phone" class="form-control" placeholder="Enter your phone number" required>
+                        </div>
+                        <button type="submit" name="register" class="btn btn-custom w-100">Đăng Ký</button>
+                        <p class="text-center mt-3">Đăng Ký Với</p>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="me-3"><i class="fab fa-facebook-f fa-2x"></i></a>
+                            <a href="#" class="me-3"><i class="fab fa-google fa-2x"></i></a>
+                            <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Bạn Đã Có Tài Khoản? <a href="?act=login" class="text-decoration-none">Đăng Nhập</a></p>
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password" required>
-                    </div>
-                    <div class="input-field">
-                        <i class="fas fa-phone"></i>
-                        <input type="text" name="phone" placeholder="Phone" required>
-                    </div>
-                    <input type="submit" name="register" value="Đăng Ký" class="btn solid">
-                </form>
-
-                <!-- Form đăng ký -->
-
-
-
-            </div>
-        </div>
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>Bạn đã có tài khoản ?</h3>
-                    <p>Vui lòng đăng nhập tại đây.</p>
-                    <button class="btn transparent" id="sign-up-btn">
-                        <a href="<?= '?act=login' ?>">Đăng Nhập</a>
-                    </button>
                 </div>
             </div>
-            <!-- <div class="panel right-panel">
-                <div class="content">
-                    <h3>One of Us?</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut, error.</p>
-                    <button class="btn transparent" id="sign-in-btn">
-                        Sign In
-                    </button>
-                </div>
-            </div> -->
         </div>
     </div>
-    <!-- <script>
-        const sign_in_btn = document.querySelector("#sign-in-btn");
-        const sign_up_btn = document.querySelector("#sign-up-btn");
-        const container = document.querySelector(".container");
-
-        sign_up_btn.addEventListener("click", () => {
-            container.classList.add("sign-up-mode");
-        });
-        sign_in_btn.addEventListener("click", () => {
-            container.classList.remove("sign-up-mode");
-        });
-    </script> -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
