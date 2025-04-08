@@ -75,18 +75,14 @@ $listdm = $modelDanhMuc->getAllDanhMuc();
                         echo '<img src="clients/assets/img/avata.jpg" alt="Account" style="height: 30px; width: auto;" /> ' . htmlspecialchars($email);
                         echo '</button>';
                         echo '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">';
-                        // echo '<li><a class="dropdown-item" href="?act=profile">Tài Khoản Của Tôi</a></li>';
+                        echo '<li><a class="dropdown-item" href="?act=profile">Hồ Sơ Cá Nhân</a></li>';
                         echo '<li><a class="dropdown-item" href="?act=don-hang">Đơn hàng</a></li>';
 
-                        // Nếu là admin, hiển thị mục "Quản lý Admin"
-                        // if ($isAdmin) {
-                        //     echo '<li><a class="dropdown-item" href="lo">Quản lý Admin</a></li>';
-                        // }
 
                         // Thêm mục chuyển đến trang admin nếu là admin
                         if ($isAdmin) {
                             $_SESSION['admin_auth'] = true;
-                            echo '<li><a class="dropdown-item text-danger" href="http://localhost/du_an_1/admin/?act=/">Trang Admin</a></li>';
+                            echo '<li><a class="dropdown-item text-danger" href="http://localhost/DuAn1/admin/?act=/">Trang Admin</a></li>';
                         }
 
 
@@ -99,12 +95,6 @@ $listdm = $modelDanhMuc->getAllDanhMuc();
                     }
                     ?>
 
-
-
-
-
-
-
                 </div>
             </nav>
             <div id="header-carousel" class="carousel slide" data-ride="carousel">
@@ -112,7 +102,24 @@ $listdm = $modelDanhMuc->getAllDanhMuc();
                     <?php
                     $firstActive = true; // Biến kiểm tra để gán "active" cho banner đầu tiên hợp lệ
                     $hasActiveBanner = false; // Biến kiểm tra xem có banner nào hiển thị không
-
+                    foreach ($listbanner as $banner): 
+                        if ($banner['Status'] == 1): // Kiểm tra trạng thái
+                            $hasActiveBanner = true; // Có ít nhất một banner hợp lệ
+                    ?>
+                            <div class="carousel-item <?= $firstActive ? 'active' : '' ?>" style="height: 410px;">
+                                <img class="img-fluid" src="admin/<?= $banner['Image'] ?>" alt="">
+                                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                    <div class="p-3" style="max-width: 700px;">
+                                        <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order</h4>
+                                        <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                        <a href="?act=sanpham" class="btn btn-light py-2 px-3">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php 
+                            $firstActive = false; // Gán active cho banner đầu tiên, các banner sau không cần
+                        endif;
+                    endforeach; 
                     
                     // Nếu không có banner nào hiển thị, hiển thị banner mặc định
                     if (!$hasActiveBanner):
@@ -172,5 +179,102 @@ function toggleMenu() {
     }
     .nav-item.nav-link {
     color: black !important;
+    }
+    .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button */
+.dropdown-toggle {
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Avatar icon in the dropdown button */
+.dropdown-toggle img {
+  border-radius: 50%;
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+}
+
+/* Button hover effect */
+.dropdown-toggle:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Display the dropdown when clicked */
+.dropdown-menu.show {
+  display: block;
+}
+
+/* Dropdown menu items */
+.dropdown-menu .dropdown-item {
+  padding: 8px 20px;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+/* Item hover effect */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+/* Active or danger items (e.g., Admin or Logout) */
+.dropdown-menu .text-danger {
+  color: #dc3545 !important;
+}
+
+/* Ensure dropdown items are aligned */
+.dropdown-menu .dropdown-item {
+  display: block;
+  text-align: left;
+}
+
+/* Small screen adjustments */
+@media (max-width: 768px) {
+  .dropdown-toggle {
+    font-size: 14px;
+    padding: 6px 15px;
+  }
+
+  .dropdown-menu {
+    min-width: 180px;
+  }
+
+  .dropdown-menu .dropdown-item {
+    font-size: 14px;
+  }
 }
 </style>

@@ -15,8 +15,8 @@ ob_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo.png">
-    <title>Book-Store</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo11.png">
+    <title>StoreBook</title>
     <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <link href="dist/css/style.min.css" rel="stylesheet">
 </head>
@@ -28,9 +28,9 @@ ob_start();
                 <div class="navbar-header" data-logobg="skin5">
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                             class="ti-menu ti-close"></i></a>
-                    <a class="navbar-brand" href="http://localhost/DuAn1/">
+                    <a class="navbar-brand" href="http://localhost/Duan1/">
                         <b class="logo-icon p-l-10">
-                            <img src="assets/images/logo.png" alt="homepage" class="light-logo"
+                            <img src="assets/images/logo11.png" alt="homepage" class="light-logo"
                                 style="width: 150px; height: auto; max-height: 50px;" />
                         </b>
                     </a>
