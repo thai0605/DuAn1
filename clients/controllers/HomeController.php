@@ -1,17 +1,20 @@
 <?php
 
 class HomeController{
-    public $home;
+
     public $danhmuc;
     public $sanpham;
     public $banner;
-
     public $sanphamdm;
+    public $binhluan;
 
 
     public function __construct(){
         $this->danhmuc = new Danhmuc();
         $this->sanpham = new SanPham();
+        $this->banner = new Banner();
+        $this->binhluan = new BinhLuan();
+        
     }
 
     public function home(){
@@ -20,7 +23,7 @@ class HomeController{
            $sanphamnew = $this->sanpham->getAllSanPham();
            $sanphams_hot = $this->sanpham->getAllSanPhamHot ();
         //    $sanphams_sale=$this->modelSanPham->getAllSanPhamSale();
-        //    $listbanner=$this->banner->getAllbanner();
+           $listbanner=$this->banner->getAllbanner();
 
         require_once 'clients/views/layouts/navbar.php';
         require_once 'clients/views/home.php'; 
@@ -30,6 +33,9 @@ class HomeController{
     }
 
     public function chitietsanpham(){
+
+        $binhluans = $this->binhluan->getAllBinhLuan();
+        $danhgias = $this->binhluan->getAllDanhGia();
         if (!isset($_GET['id'])) {
             // Xử lý khi không có id
             header('Location: clients');
@@ -37,6 +43,11 @@ class HomeController{
         }
 
         $sanphamCT = $this->sanpham->getSanPhamById($_GET['id']);
+        $sanphamCT['variants'] = $this->sanpham->getSanPhamAllVariant($_GET['id']);
+        $sanphamCL = [];
+        if ($sanphamCT) {
+            $sanphamCL = $this->sanpham->getSanPhamCungLoai($sanphamCT['category_id'],$_GET['id']);
+        } 
         require_once 'clients/views/chitietsp.php';
     }
 
@@ -81,6 +92,46 @@ class HomeController{
            
         }
     }  
+    public function addBinhluan() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user_id = $_POST['user_id'] ?? null;
+            $comics_id = $_POST['comics_id'] ?? null;
+            $Content = $_POST['Content'] ?? null;
+
+            if ($user_id && $comics_id && $Content) {
+                $result = $this->binhluan->addComment($user_id, $comics_id, $Content);
+    
+                if ($result) {
+                    header('location:?act=chitietsp&id='.$comics_id);
+                } else {
+                    echo "Đã có lỗi xảy ra khi thêm bình luận.";
+                }
+            } else {
+                echo "Vui lòng nhập đầy đủ thông tin.";
+            }
+        }
+    }
+
+    public function addDanhGia() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user_id = $_POST['user_id'] ?? null;
+            $comic_id = $_POST['comic_id'] ?? null;
+            $rating = $_POST['rating'] ?? null;
+            $review_text = $_POST['review_text'] ?? null;
+
+            if ($user_id && $comic_id && $rating && $review_text) {
+                $result = $this->binhluan->addDanhGia($user_id, $comic_id, $rating, $review_text);
+
+                if ($result) {
+                    header('location:?act=chitietsp&id=' . $comic_id);
+                } else {
+                    echo "Đã có lỗi xảy ra khi thêm đánh giá.";
+                }
+            } else {
+                echo "Vui lòng nhập đầy đủ thông tin.";
+            }
+        }
+    }
 
     public function lienhe(){
         require_once 'clients/views/lienhe.php';

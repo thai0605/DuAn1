@@ -1,13 +1,15 @@
 <?php ob_start();?>
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8">
-    <link rel="icon" type="" sizes="16x16" href="clients/assets/logo/logo.png">
-    <title>Book-Store</title>
+    <link rel="icon" type="" sizes="16x16" href="clients/assets/logo/logo11.png">
+    <title>StoreBook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" href="assets/logo/logo.png">
-    <link rel="shortcut icon" href="assets/logo/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo/logo11.png">
+    <link rel="shortcut icon" href="assets/logo/logo11.png">
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
@@ -62,7 +64,7 @@
                 <a href="./" class="text-decoration-none">
 
                     <h1 class="m-0 display-5 font-weight-semi-bold">
-                    <img src="clients/assets/logo/logo.png" alt="Logo" style="max-width: 100%; height: 80px">
+                    <img src="clients/assets/logo/logo11.png" alt="Logo" style="max-width: 100%; height: 80px">
                     </h1>
                 </a>
             </div>

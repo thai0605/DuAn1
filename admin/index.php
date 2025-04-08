@@ -72,10 +72,11 @@ require_once './models/AdminBanner.php';
 $home = new HomeController();
 
 // // Include header nếu không phải trang login
-// if (!in_array($act, $publicRoutes)) {
+if (!in_array($act, $publicRoutes)) {
     include_once "./views/layout/header.php";
     include_once "./views/layout/sidebar.php";
-// }
+}
+
 
 match ($act) {
     '' => !isset($_SESSION['admin_id'])

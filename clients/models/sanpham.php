@@ -183,5 +183,49 @@ class   Sanpham {
             return [];
         }
     }
+    public function getSanPhamAllVariant($id)
+    {
+        try {
+            $sql = "SELECT 
+                v.*,
+                cs.sale_value,
+                CASE 
+                    WHEN cs.end_date >= CURRENT_DATE AND cs.start_date <= CURRENT_DATE THEN 1
+                    ELSE 0
+                END as is_on_sale
+            FROM comic_variants v
+            LEFT JOIN comic_sales cs ON v.comic_id = cs.comic_id
+            WHERE v.comic_id = :id";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            error_log("Error in getSanPhamAllVariant: " . $e->getMessage());
+            return [];
+        }
+    }
+    public function getSanPhamCungLoai($category_id, $product_id)
+{
+    try {
+        $sql = "SELECT 
+                c.*, 
+                cs.sale_value
+            FROM comics c
+            LEFT JOIN comic_sales cs ON c.id = cs.comic_id 
+                AND cs.end_date >= CURRENT_DATE 
+                AND cs.start_date <= CURRENT_DATE
+            WHERE c.category_id = :category_id 
+            AND c.id != :product_id
+            ORDER BY c.id ASC";
+        
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([":category_id" => $category_id, ":product_id" => $product_id]);
+        return $stmt->fetchAll();
+    } catch (Exception $e) {
+        error_log("Error in getSanPhamCungLoai: " . $e->getMessage());
+        return [];
+    }
+}
     
 }

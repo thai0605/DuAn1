@@ -25,48 +25,75 @@ class AccountController
     }
 
     // Phương thức sửa hồ sơ
+   
     public function editProfile()
-    {
-        if (!isset($_SESSION['user'])) {
-            header("Location: ?act=login");
-            exit();
-        }
-
-        // Lấy thông tin đầy đủ của user từ database
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
-        $stmt->execute(['id' => $_SESSION['user']['id']]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['name'] ?? '';
-            $email = $_POST['email'] ?? '';
-            $phone = $_POST['phone'] ?? '';
-            
-            // Tạo đối tượng User và cập nhật thông tin
-            $userObj = new User($_SESSION['user'], $this->pdo);
-            $updated = $userObj->updateProfile($_SESSION['user']['id'], [
-                'name' => $name,
-                'email' => $email,
-                'phone' => $phone
-            ]);
-
-            if ($updated) {
-                // Cập nhật session với thông tin mới
-                $_SESSION['user']['name'] = $name;
-                $_SESSION['user']['email'] = $email;
-                $_SESSION['user']['phone'] = $phone;
-                $_SESSION['success'] = "Cập nhật thông tin thành công!";
-            } else {
-                $_SESSION['error'] = "Có lỗi xảy ra khi cập nhật thông tin!";
-            }
-
-            header("Location: ?act=don-hang");
-            exit();
-        }
-
-        // Hiển thị form chỉnh sửa với thông tin đầy đủ từ database
-        require_once 'clients/views/account/edit-profile.php';
+{
+    if (!isset($_SESSION['user'])) {
+        header("Location: ?act=login");
+        exit();
     }
+
+    // Lấy thông tin đầy đủ của user từ database
+    $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
+    $stmt->execute(['id' => $_SESSION['user']['id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name = $_POST['name'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+
+        // Kiểm tra xem người dùng có tải ảnh lên không
+        if (!empty($_FILES['avatar']['name'])) {
+            $uploadDir = 'uploads/user/'; // Thư mục lưu ảnh
+            $fileName = time() . '_' . basename($_FILES['avatar']['name']); // Đổi tên file để tránh trùng
+            $uploadFile = $uploadDir . $fileName;
+
+            // Kiểm tra định dạng hợp lệ
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (in_array($_FILES['avatar']['type'], $allowedTypes)) {
+                if (move_uploaded_file($_FILES['avatar']['tmp_name'], $uploadFile)) {
+                    $avatar = $uploadFile; // Đường dẫn ảnh mới
+                } else {
+                    $_SESSION['error'] = "Lỗi khi tải ảnh lên.";
+                    header("Location: ?act=edit-profile");
+                    exit();
+                }
+            } else {
+                $_SESSION['error'] = "Định dạng ảnh không hợp lệ.";
+                header("Location: ?act=edit-profile");
+                exit();
+            }
+        } else {
+            $avatar = $user['avatar']; // Giữ nguyên ảnh cũ nếu không chọn ảnh mới
+        }
+
+        // Cập nhật thông tin
+        $userObj = new User($_SESSION['user'], $this->pdo);
+        $updated = $userObj->updateProfile($_SESSION['user']['id'], [
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'avatar' => $avatar
+        ]);
+
+        if ($updated) {
+            $_SESSION['user']['name'] = $name;
+            $_SESSION['user']['email'] = $email;
+            $_SESSION['user']['phone'] = $phone;
+            $_SESSION['user']['avatar'] = $avatar; // Cập nhật session để ảnh mới hiển thị ngay
+            $_SESSION['success'] = "Cập nhật thông tin thành công!";
+        } else {
+            $_SESSION['error'] = "Có lỗi xảy ra khi cập nhật thông tin!";
+        }
+
+        header("Location: ?act=edit-profile");
+        exit();
+    }
+
+    require_once 'clients/views/account/edit-profile.php';
+}
+
 
     // Phương thức đổi mật khẩu
     public function changePassword()
