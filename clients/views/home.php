@@ -219,21 +219,21 @@
     <div class="row px-xl-5">
         <div class="col-md-6 pb-4">
             <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
-                <img src="clients/assets/img/offer-1.png"  alt="">
+                <img src="clients/assets/img/bongda.webp"  alt="">
                 <div class="position-relative" style="z-index: 1;">
-                    <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
-                    <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    <h5 class="text-uppercase text-primary mb-3">Giảm 20% cho các sản phẩm</h5>
+                    <h1 class="mb-4 font-weight-semi-bold">Thể Loại : Thể Thao </h1>
+                    <a href="?act=search&category_id=6" class="btn btn-outline-primary py-md-2 px-md-3">Mua Ngay</a>
                 </div>
             </div>
         </div>
         <div class="col-md-6 pb-4">
             <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
-                <img src="clients/assets/img/offer-2.png"  alt="">
+                <img src="clients/assets/img/tinhcam.jpg"  alt="">
                 <div class="position-relative" style="z-index: 1;">
-                    <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
-                    <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    <h5 class="text-uppercase text-primary mb-3">Giảm 20% cho các sản phẩm</h5>
+                    <h1 class="mb-4 font-weight-semi-bold">Thể Loại : Tình Cảm </h1>
+                    <a href="?act=search&category_id=1" class="btn btn-outline-primary py-md-2 px-md-3">Mua Ngay</a>
                 </div>
             </div>
         </div>
@@ -242,11 +242,11 @@
 
 
 <!-- Products Start -->
-<div class="container-fluid pt-5">
+<!-- <div class="container-fluid pt-5">
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Sách Siêu Ưu Đãi</span></h2>
     </div>
-</div>
+</div> -->
 <!-- Products End -->
 
 
