@@ -56,6 +56,7 @@ if ($act === 'end-session' && isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     exit;
 }
 
+require_once './controllers/UserController.php';
 require_once './controllers/DanhMucController.php';
 require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
@@ -63,7 +64,7 @@ require_once './controllers/AuthController.php';
 require_once './controllers/GiaodienController.php';
 require_once './controllers/BinhluanController.php';
 
-
+require_once './models/User.php';
 require_once './models/VariantSanPham.php';
 require_once './models/DanhMuc.php';
 require_once './models/Thongke.php';
@@ -73,6 +74,7 @@ require_once './models/AdminBanner.php';
 require_once './models/AdminBinhluan.php';
 
 $home = new HomeController();
+$user = new userController();
 
 // // Include header nếu không phải trang login
 if (!in_array($act, $publicRoutes)) {
@@ -130,6 +132,18 @@ match ($act) {
     'delete-danhgia' => (new AdminBinhluanController())->deletedanhgia(),
     'approve-danhgia' => (new AdminBinhluanController())->approveDanhGia(),
     'reject-danhgia' => (new AdminBinhluanController())->rejectDanhGia(),
+
+     //user
+     'user' => $user->views_user(),
+     'add-user' => $user->views_add_user(),
+     'post-add-user' => $user->views_post_add_user(),
+     'edit-user' => $user->views_edit_user(),
+     'post-edit-user' => $user->views_post_edit_user(),
+     'delete-user' => $user->delete_user(),
+
+
+
+
     default => header('Location: ?act=show-login-form')
 };
 
