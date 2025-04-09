@@ -23,7 +23,7 @@ if (isset($_SESSION['admin_id'])) {
 // // Lấy action từ URL
 $act = $_GET['act'] ?? '';
 // Danh sách các route được phép truy cập khi chưa đăng nhập
-$publicRoutes = ['loginAdmin', 'show-login-form', 'end-session'];
+$publicRoutes = ['loginAdmin', 'show-login-page', 'end-session'];
 
 // Kiểm tra xem người dùng đã được xác thực từ trang clients chuyển sang
 if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true && isset($_SESSION['user'])) {
@@ -44,7 +44,7 @@ if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true && isset(
     // Kiểm tra đăng nhập
     if (!isset($_SESSION['admin_id'])) {
         if (!in_array($act, $publicRoutes)) {
-            header('Location: ?act=show-login-form');
+            header('Location: ?act=show-login-page');
             exit;
         }
     }
@@ -61,8 +61,10 @@ require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
 require_once './controllers/AuthController.php';
 require_once './controllers/GiaodienController.php';
+require_once './controllers/UserController.php';
 
 
+require_once './models/User.php';
 require_once './models/VariantSanPham.php';
 require_once './models/DanhMuc.php';
 require_once './models/Thongke.php';
@@ -70,19 +72,20 @@ require_once './models/SanPham.php';
 require_once './models/AuthModel.php';
 require_once './models/AdminBanner.php';
 $home = new HomeController();
+$user = new userController();
 
 // // Include header nếu không phải trang login
-// if (!in_array($act, $publicRoutes)) {
+ if (!in_array($act, $publicRoutes)) {
     include_once "./views/layout/header.php";
     include_once "./views/layout/sidebar.php";
-// }
+}
 
 match ($act) {
     '' => !isset($_SESSION['admin_id'])
-    ? header('Location: ?act=show-login-form')
+    ? header('Location: ?act=show-login-page   ')
     : $home->views_home(),
 'loginAdmin' => (new AuthController())->login(),
-'show-login-form' => (new AuthController())->showLoginForm(),
+'show-login-page' => (new AuthController())->showLoginForm(),
 'logout' => $auth->logout(),
 'end-session' => exit(),
 
@@ -93,6 +96,14 @@ match ($act) {
     'form-sua-danh-muc' => (new DanhMucController())->formEditDanhMuc(),
     'sua-danh-muc' => (new DanhMucController())->postEditDanhMuc(),
     'xoa-danh-muc' => (new DanhMucController())->deleteDanhMuc(),
+
+    //user
+    'user' => $user->views_user(),
+    'add-user' => $user->views_add_user(),
+    'post-add-user' => $user->views_post_add_user(),
+    'edit-user' => $user->views_edit_user(),
+    'post-edit-user' => $user->views_post_edit_user(),
+    'delete-user' => $user->delete_user(),
 
     //sanpham
     'san-pham' => (new SanPhamController())->danhSachSanPham(),
@@ -119,7 +130,7 @@ match ($act) {
     'form-edit-banner' => (new AdminGiaodienController())->formEditBanner(),
     'edit-banner' => (new AdminGiaodienController())->postEditBanner(),
 
-    default => header('Location: ?act=show-login-form')
+    default => header('Location: ?act=show-login-page   ')
 };
 
 // Include footer nếu không phải trang login

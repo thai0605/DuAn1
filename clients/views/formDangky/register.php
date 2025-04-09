@@ -48,7 +48,7 @@
                         <input type="text" name="phone" placeholder="Phone" required>
                     </div>
                     <input type="submit" name="register" value="Đăng Ký" class="btn solid">
-                </form>
+                </form>     
 
                 <!-- Form đăng ký -->
 
@@ -91,4 +91,4 @@
     </script> -->
 </body>
 
-</html>
+</html> 

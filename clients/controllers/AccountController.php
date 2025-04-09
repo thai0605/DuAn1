@@ -1,7 +1,7 @@
 <?php
 class AccountController
 {
-    private $pdo;
+    private $pdo;   
 
     // Khởi tạo với kết nối CSDL
     public function __construct($pdo) {

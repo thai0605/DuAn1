@@ -5,7 +5,7 @@ class Auth
 
     public function __construct()
     {
-        $this->db = new PDO("mysql:host=localhost;dbname=duan1", "root", "");
+        $this->db = new PDO("mysql:host=localhost;dbname=duan1main", "root", "");
     }
 
     public function isAdmin()
@@ -53,7 +53,7 @@ class Auth
         }
 
         // Chuyển hướng về trang login
-        header('Location: ?act=show-login-form');
+        header('Location: ?act=show-login-page   ');
         exit;
     }
 
@@ -79,12 +79,12 @@ class Auth
                     exit;
                 } else {
                     $_SESSION['error'] = 'Email hoặc mật khẩu không đúng';
-                    header('Location: ?act=show-login-form');
+                    header('Location: ?act=show-login-page   ');
                     exit;
                 }
             } catch (PDOException $e) {
                 $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng thử lại sau';
-                header('Location: ?act=show-login-form');
+                header('Location: ?act=show-login-page   ');
                 exit;
             }
         }

@@ -6,13 +6,14 @@ class AuthController
 
     public function __construct()
     {
-        $this->db = new PDO("mysql:host=localhost;dbname=duan1", "root", "");
+        $this->db = new PDO("mysql:host=localhost;dbname=duan1main", "root", "");
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->auth = new Auth();
     }
 
     public function showLoginForm()
     {
+        
         if (isset($_SESSION['admin_id']) && $this->auth->isAdmin()) {
             header('Location: ./');
             exit;
@@ -39,12 +40,12 @@ class AuthController
                     exit;
                 } else {
                     $_SESSION['error'] = 'Email hoặc mật khẩu không đúng';
-                    header('Location: ?act=show-login-form');
+                    header('Location: ?act=show-login-page   ');
                     exit;
                 }
             } catch (PDOException $e) {
                 $_SESSION['error'] = 'Có lỗi xảy ra, vui lòng thử lại sau';
-                header('Location: ?act=show-login-form');
+                header('Location: ?act=show-login-page   ');
                 exit;
             }
         }
