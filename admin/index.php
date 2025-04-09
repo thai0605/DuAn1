@@ -34,9 +34,9 @@ if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true && isset(
     $_SESSION['is_logged_in'] = true;
     $_SESSION['admin_logged_in'] = true;
     $_SESSION['last_activity'] = time();
-    
+
     unset($_SESSION['admin_auth']); // Xóa session tạm thời
-    
+
     // Chuyển hướng về trang chủ admin
     header('Location: ?act=/');
     exit;
@@ -56,6 +56,7 @@ if ($act === 'end-session' && isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     exit;
 }
 
+require_once './controllers/UserController.php';
 require_once './controllers/DanhMucController.php';
 require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
@@ -63,9 +64,8 @@ require_once './controllers/AuthController.php';
 require_once './controllers/GiaodienController.php';
 require_once './controllers/KhuyenMaiController.php';
 require_once './controllers/OrderController.php';
-require_once './controllers/UserController.php';
 
-
+require_once './models/User.php';
 require_once './models/VariantSanPham.php';
 require_once './models/DanhMuc.php';
 require_once './models/Thongke.php';
@@ -74,10 +74,11 @@ require_once './models/AuthModel.php';
 require_once './models/AdminBanner.php';
 require_once './models/KhuyenMai.php';
 require_once './models/Order.php';
-require_once './models/User.php';
+
 $home = new HomeController();
 $khuyenmai = new KhuyenMaiController();
 $order = new OrderController();
+
 // // Include header nếu không phải trang login
 if (!in_array($act, $publicRoutes)) {
     include_once "./views/layout/header.php";
@@ -89,10 +90,10 @@ match ($act) {
     '' => !isset($_SESSION['admin_id'])
     ? header('Location: ?act=show-login-form')
     : $home->views_home(),
-'loginAdmin' => (new AuthController())->login(),
-'show-login-form' => (new AuthController())->showLoginForm(),
-'logout' => $auth->logout(),
-'end-session' => exit(),
+    'loginAdmin' => (new AuthController())->login(),
+    'show-login-form' => (new AuthController())->showLoginForm(),
+    'logout' => $auth->logout(),
+    'end-session' => exit(),
 
     //danh mục
     'listdm' => (new DanhMucController())->danhsachDanhMuc(),
@@ -127,33 +128,26 @@ match ($act) {
     'form-edit-banner' => (new AdminGiaodienController())->formEditBanner(),
     'edit-banner' => (new AdminGiaodienController())->postEditBanner(),
 
-      //khuyen mai
-      'khuyen-mai' => $khuyenmai->View_KhuyenMai(),
-      'form-add-khuyen-mai' => $khuyenmai->formAddKhuyenMai(),
-      'post-add-khuyen-mai' => $khuyenmai->postAddKhuyenMai(),
-      'form-edit-khuyen-mai' => $khuyenmai->formEditKhuyenMai(),
-      'post-edit-khuyen-mai' => $khuyenmai->postEditKhuyenMai(),
-      'delete-khuyen-mai' => $khuyenmai->deleteKhuyenMai(),
+    //khuyen mai
+    'khuyen-mai' => $khuyenmai->View_KhuyenMai(),
+    'form-add-khuyen-mai' => $khuyenmai->formAddKhuyenMai(),
+    'post-add-khuyen-mai' => $khuyenmai->postAddKhuyenMai(),
+    'form-edit-khuyen-mai' => $khuyenmai->formEditKhuyenMai(),
+    'post-edit-khuyen-mai' => $khuyenmai->postEditKhuyenMai(),
+    'delete-khuyen-mai' => $khuyenmai->deleteKhuyenMai(),
 
     //order
-
     'order' => $order->views_order(),
+    
     'edit-order' => $order->views_edit_order(),
     'post-edit-order' => $order->views_post_edit_order(),
     'order-detail' => $order->views_order_detail(),
 
-    //user
-    'user' => $user->views_user(),
-    'add-user' => $user->views_add_user(),
-    'post-add-user' => $user->views_post_add_user(),
-    'edit-user' => $user->views_edit_user(),
-    'post-edit-user' => $user->views_post_edit_user(),
-    'delete-user' => $user->delete_user(),
 
     default => header('Location: ?act=show-login-form')
 };
 
 // Include footer nếu không phải trang login
 // if (!in_array($act, $publicRoutes)) {
-    include_once "./views/layout/footer.php";
+include_once "./views/layout/footer.php";
 // }
