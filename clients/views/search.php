@@ -104,9 +104,21 @@
                             </span>
                         <?php endif; ?>
 
-                        <?php if (!empty($_GET['category_id']) && isset($listdm[$_GET['category_id']])): ?>
+                        <?php
+                        $categoryName = '';
+                        $selectedCategoryId = isset($_GET['category_id']) ? (int)$_GET['category_id'] : 0;
+
+                        foreach ($listdm as $dm) {
+                            if ($dm['id'] == $selectedCategoryId) {
+                                $categoryName = $dm['name'];
+                                break;
+                            }
+                        }
+                        ?>
+
+                        <?php if (!empty($categoryName)): ?>
                             <span class="badge badge-info m-1 p-2">
-                                Danh mục: <?= htmlspecialchars($listdm[$_GET['category_id']]['name']) ?>
+                                Danh mục: <?= htmlspecialchars($categoryName) ?>
                             </span>
                         <?php endif; ?>
 
@@ -264,11 +276,11 @@
     </div>
 </div>
 <style>
-.custom-img
-{
-    width: 200px;  /* Hoặc kích thước mong muốn */
-    height: 200px;
-    object-fit: cover; /* Cắt ảnh để vừa khung mà không bị méo */
-}
-
+    .custom-img {
+        width: 200px;
+        /* Hoặc kích thước mong muốn */
+        height: 200px;
+        object-fit: cover;
+        /* Cắt ảnh để vừa khung mà không bị méo */
+    }
 </style>

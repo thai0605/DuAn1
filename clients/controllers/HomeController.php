@@ -21,7 +21,7 @@ class HomeController{
         try {
            $listDanhMuc = $this->danhmuc->getAllDanhMuc();
            $sanphamnew = $this->sanpham->getAllSanPham();
-           $sanphams_hot = $this->sanpham->getAllSanPhamHot ();
+           $sanphams_hot = $this->sanpham->getAllSanPhamHot();
         //    $sanphams_sale=$this->modelSanPham->getAllSanPhamSale();
            $listbanner=$this->banner->getAllbanner();
 

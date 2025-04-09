@@ -220,6 +220,10 @@ if (!empty($sanphamCT)): ?>
                             return $ratings[$ratingText] ?? 0;
                         }
                         ?>
+                        <?php
+                        $reviews_shown = 0; // Biến đếm số lượng bình luận đã hiển thị
+                        $has_reviews = false; // Khởi tạo biến kiểm tra có bình luận hay không
+                        ?>
 
                         <?php foreach ($danhgias as $key => $danhgia): ?>
                             <?php if ($sanphamCT['id'] == $danhgia['comic_id']): ?>
@@ -254,6 +258,14 @@ if (!empty($sanphamCT)): ?>
                                 <?php endif; ?>
                             <?php endif; ?>
                         <?php endforeach; ?>
+                        <?php if (!$has_reviews): ?>
+                            <p>Sản phẩm chưa có đanh giá </p>
+                        <?php elseif ($reviews_shown > 5): ?>
+                            <div class="btn-group mt-3">
+                                <button id="load-more-comments" class="btn btn-primary">Xem thêm</button>
+                                <button id="close-comments" class="btn btn-secondary" style="display: none;">Đóng</button>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Form đánh giá sản phẩm -->
