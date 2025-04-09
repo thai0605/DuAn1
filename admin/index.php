@@ -56,23 +56,28 @@ if ($act === 'end-session' && isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     exit;
 }
 
+require_once './controllers/UserController.php';
 require_once './controllers/DanhMucController.php';
 require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
 require_once './controllers/AuthController.php';
 require_once './controllers/GiaodienController.php';
-require_once './controllers/BinhluanController.php';
+require_once './controllers/KhuyenMaiController.php';
+require_once './controllers/OrderController.php';
 
-
+require_once './models/User.php';
 require_once './models/VariantSanPham.php';
 require_once './models/DanhMuc.php';
 require_once './models/Thongke.php';
 require_once './models/SanPham.php';
 require_once './models/AuthModel.php';
 require_once './models/AdminBanner.php';
-require_once './models/AdminBinhluan.php';
+require_once './models/KhuyenMai.php';
+require_once './models/Order.php';
 
 $home = new HomeController();
+$khuyenmai = new KhuyenMaiController();
+$order = new OrderController();
 
 // // Include header nếu không phải trang login
 if (!in_array($act, $publicRoutes)) {
@@ -130,7 +135,6 @@ match ($act) {
     'delete-danhgia' => (new AdminBinhluanController())->deletedanhgia(),
     'approve-danhgia' => (new AdminBinhluanController())->approveDanhGia(),
     'reject-danhgia' => (new AdminBinhluanController())->rejectDanhGia(),
-
     default => header('Location: ?act=show-login-form')
 };
 
