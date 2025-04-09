@@ -62,7 +62,8 @@ require_once './controllers/HomeController.php';
 require_once './controllers/SanPhamController.php';
 require_once './controllers/AuthController.php';
 require_once './controllers/GiaodienController.php';
-require_once './controllers/BinhluanController.php';
+require_once './controllers/KhuyenMaiController.php';
+require_once './controllers/OrderController.php';
 
 require_once './models/User.php';
 require_once './models/VariantSanPham.php';
@@ -71,10 +72,12 @@ require_once './models/Thongke.php';
 require_once './models/SanPham.php';
 require_once './models/AuthModel.php';
 require_once './models/AdminBanner.php';
-require_once './models/AdminBinhluan.php';
+require_once './models/KhuyenMai.php';
+require_once './models/Order.php';
 
 $home = new HomeController();
-$user = new userController();
+$khuyenmai = new KhuyenMaiController();
+$order = new OrderController();
 
 // // Include header nếu không phải trang login
 if (!in_array($act, $publicRoutes)) {
@@ -125,23 +128,20 @@ match ($act) {
     'form-edit-banner' => (new AdminGiaodienController())->formEditBanner(),
     'edit-banner' => (new AdminGiaodienController())->postEditBanner(),
 
-    //binh luan
-    'binh-luan' => (new AdminBinhluanController())->listBinhluan(),
-    'update-trang-thai-binh-luan' => (new AdminBinhluanController())->updateTrangThaiBinhLuan(),
-    'danh-gia' => (new AdminBinhluanController())->listDanhgia(),
-    'delete-danhgia' => (new AdminBinhluanController())->deletedanhgia(),
-    'approve-danhgia' => (new AdminBinhluanController())->approveDanhGia(),
-    'reject-danhgia' => (new AdminBinhluanController())->rejectDanhGia(),
+    //khuyen mai
+    'khuyen-mai' => $khuyenmai->View_KhuyenMai(),
+    'form-add-khuyen-mai' => $khuyenmai->formAddKhuyenMai(),
+    'post-add-khuyen-mai' => $khuyenmai->postAddKhuyenMai(),
+    'form-edit-khuyen-mai' => $khuyenmai->formEditKhuyenMai(),
+    'post-edit-khuyen-mai' => $khuyenmai->postEditKhuyenMai(),
+    'delete-khuyen-mai' => $khuyenmai->deleteKhuyenMai(),
 
-     //user
-     'user' => $user->views_user(),
-     'add-user' => $user->views_add_user(),
-     'post-add-user' => $user->views_post_add_user(),
-     'edit-user' => $user->views_edit_user(),
-     'post-edit-user' => $user->views_post_edit_user(),
-     'delete-user' => $user->delete_user(),
+    //order
+    'order' => $order->views_order(),
 
-
+    'edit-order' => $order->views_edit_order(),
+    'post-edit-order' => $order->views_post_edit_order(),
+    'order-detail' => $order->views_order_detail(),
 
 
     default => header('Location: ?act=show-login-form')
