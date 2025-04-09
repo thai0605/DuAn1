@@ -130,6 +130,7 @@ match ($act) {
     'delete-danhgia' => (new AdminBinhluanController())->deletedanhgia(),
     'approve-danhgia' => (new AdminBinhluanController())->approveDanhGia(),
     'reject-danhgia' => (new AdminBinhluanController())->rejectDanhGia(),
+
     default => header('Location: ?act=show-login-form')
 };
 
