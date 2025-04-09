@@ -140,7 +140,7 @@ match ($act) {
      'edit-user' => $user->views_edit_user(),
      'post-edit-user' => $user->views_post_edit_user(),
      'delete-user' => $user->delete_user(),
-
+//lỗi thì bảo tao
 
 
 
