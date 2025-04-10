@@ -78,6 +78,7 @@ require_once './models/Order.php';
 $home = new HomeController();
 $khuyenmai = new KhuyenMaiController();
 $order = new OrderController();
+$user = new UserController();
 
 // // Include header nếu không phải trang login
 if (!in_array($act, $publicRoutes)) {
