@@ -1,5 +1,5 @@
 <div class="page-wrapper">
-    <h2>Quản lý tài khoản</h2>
+    <h2>Quản lý tài khoản khách hàng</h2>
 
     <!-- Main content -->
     <section class="content">
