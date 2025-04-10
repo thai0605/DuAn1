@@ -72,4 +72,15 @@ class DanhMuc
             echo "lỗi" . $e->getMessage();
         }
     }
+
+    public function countSanPhamTrongDanhMuc($id)
+{
+    $sql = "SELECT COUNT(*) AS total FROM comics WHERE category_id = :id";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    $result = $stmt->fetch();
+
+    return $result['total'];
+}
+
 }
