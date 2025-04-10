@@ -48,7 +48,7 @@ if (isset($_SESSION['admin_auth']) && $_SESSION['admin_auth'] === true && isset(
             exit;
         }
     }
-}
+} 
 
 // Xử lý kết thúc session chỉ khi có request rõ ràng
 if ($act === 'end-session' && isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
