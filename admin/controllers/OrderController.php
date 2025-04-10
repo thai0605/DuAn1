@@ -45,7 +45,8 @@ class OrderController{
          header('Location: ?act=order');
         exit;
     }
-
+//xử lý cập nhật đơn hàng
+    // Kiểm tra trạng thái đơn hàng và điều kiện chuyển đổi
     private function validateOrderUpdate($data) {
         $currentOrder = $this->modelOrder->getById($data[':id']);
 

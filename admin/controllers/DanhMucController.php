@@ -83,10 +83,18 @@ class DanhMucController
     {
         $id = $_GET['id'];
         $danhMuc = $this->modelDanhmuc->getDetailDanhMuc($id);
-
+    
         if ($danhMuc) {
-            $this->modelDanhmuc->deleteDanhMuc($id);
+            $productCount = $this->modelDanhmuc->countSanPhamTrongDanhMuc($id);
+    
+            if ($productCount > 0) {
+                $_SESSION['error'] = "Không thể xóa danh mục vì đang có sản phẩm!";
+            } else {
+                $this->modelDanhmuc->deleteDanhMuc($id);
+                $_SESSION['success'] = "Xóa danh mục thành công!";
+            }
         }
+    
         header("Location: " . BASE_URL_ADMIN . '?act=listdm');
         exit();
     }
