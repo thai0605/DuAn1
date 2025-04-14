@@ -435,7 +435,7 @@
                                         </div>
                                         <div class="momo-info p-4 border rounded mx-auto" style="max-width: 350px;">
                                             <div class="mb-4">
-                                                <img src="./clients/assets/img/momo-qr.png" alt="MoMo QR" class="img-fluid" style="max-width: 200px;">
+                                                <img src="./clients/assets/img/paymomo.jpg" alt="MoMo QR" class="img-fluid" style="max-width: 200px;">
                                             </div>
                                             <div class="account-details text-start">
                                                 <p class="mb-2"><strong>Số điện thoại:</strong> 0989315010</p>

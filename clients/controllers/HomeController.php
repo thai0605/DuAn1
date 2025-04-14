@@ -22,7 +22,7 @@ class HomeController{
            $listDanhMuc = $this->danhmuc->getAllDanhMuc();
            $sanphamnew = $this->sanpham->getAllSanPham();
            $sanphams_hot = $this->sanpham->getAllSanPhamHot();
-        //    $sanphams_sale=$this->modelSanPham->getAllSanPhamSale();
+           $sanphams_sale=$this->sanpham->getAllSanPhamSale();
            $listbanner=$this->banner->getAllbanner();
 
         require_once 'clients/views/layouts/navbar.php';

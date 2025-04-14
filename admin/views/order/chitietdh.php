@@ -1,13 +1,4 @@
-<div class="container-fluid" style="margin-top: -24px;">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6" style="padding:10px 5px;">
-                    <h2>Quản lí đơn hàng</h2>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="page-wrapper">
 
     <div class="container my-5">
     <h2 class="mb-4">Chi Tiết Đơn Hàng</h2>

@@ -241,13 +241,93 @@
 </div>
 
 
-<!-- Products Start -->
-<!-- <div class="container-fluid pt-5">
+<!-- Products Start --> 
+<div class="container-fluid pt-5">
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Sách Siêu Ưu Đãi</span></h2>
     </div>
-</div> -->
-<!-- Products End -->
+    <div class="position-relative">
+        <!-- Wrapper sản phẩm -->
+        <div class="products-container overflow-hidden" style="position: relative; width: 100%;">
+            <div class="products-wrapper d-flex" style="transition: transform 0.5s ease;">
+                <?php
+                $displayed_products = array();
+                
+                foreach ($sanphams_sale as $spsale):
+                    
+                    if (in_array($spsale['id'], $displayed_products)) continue;
+                    $displayed_products[] = $spsale['id'];
+                ?>
+                    <a href="?act=chitietsp&id=<?php echo $spsale['id'] ?>" class="text-decoration-none text-dark">
+                        <div class="product-card" style="flex: 0 0 20%; max-width: 20%; padding: 0 10px; box-sizing: border-box;">
+                            <div class="card product-item border-0 mb-4">
+                                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                    <?php if (!empty($spsale['sale_value'])): ?>
+                                        <div class="position-absolute bg-danger text-white p-1" style="top: 0; left: 0; font-size: 0.9rem; z-index: 1;">
+                                            <?php
+                                            if ($spsale['sale_value'] < 100) {
+                                                echo '-' . number_format($spsale['sale_value'], 0) . '%';
+                                            } else {
+                                                echo '-' . number_format($spsale['sale_value'], 0, ',', '.') . ' đ';
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <img class="img-fluid custom-img" src="<?php echo removeFirstChar($spsale['image']) ?>" alt="" >
+                                </div>
+
+                                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                    <h6 class="text-truncate mb-3"><?php echo $spsale['title'] ?></h6>
+                                    
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="text-danger small-price">
+                                            <?php
+                                            $original_price = $spsale['original_price'];
+                                            $final_price = $original_price;
+                                            $has_discount = false;
+
+                                            // Kiểm tra giảm giá theo phần trăm hoặc giảm giá cố định
+                                            if (!empty($spsale['sale_value'])) {
+                                                $has_discount = true;
+                                                if ($spsale['sale_value'] < 100) {
+                                                    // Giảm giá theo phần trăm
+                                                    $final_price -= ($original_price * $spsale['sale_value'] / 100);
+                                                } else {
+                                                    // Giảm giá theo số tiền cố định
+                                                    $final_price -= $spsale['sale_value'];
+                                                }
+                                            }
+
+                                            echo number_format(max($final_price, 0), 0, ',', '.'); // Đảm bảo giá không âm
+                                            ?> đ
+                                        </h5>
+                                        <?php if ($has_discount): ?>
+                                            <h6 class="text-muted ml-2"><del><?php echo number_format($original_price, 0, ',', '.') ?> đ</del></h6>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-center bg-light border">
+                                    <a href="?act=chitietsp&id=<?php echo $spsale['id'] ?>" class="btn btn-sm text-dark p-0">
+                                        Xem chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach ?>
+            </div>
+        </div>
+
+        <!-- Nút điều hướng -->
+        <button class="btn-carousel btn-left">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="btn-carousel btn-right">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
 
 
 
