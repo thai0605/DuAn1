@@ -17,6 +17,28 @@ class   Sanpham {
             die("Database connection error: " . $e->getMessage());
         }
     }
+    public function getAllSanPhamSale()
+    {
+        try {
+            $sql = "SELECT 
+                c.*, 
+                cs.sale_value
+            FROM comics c
+            INNER JOIN comic_sales cs ON c.id = cs.comic_id 
+                AND cs.end_date >= CURRENT_DATE 
+                AND cs.start_date <= CURRENT_DATE
+            WHERE cs.sale_value > 0
+            ORDER BY c.original_price DESC";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            error_log("Error in getAllSanPhamSale: " . $e->getMessage());
+            return [];
+        }
+    }
+
 
 
     

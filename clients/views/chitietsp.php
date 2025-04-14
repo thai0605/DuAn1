@@ -182,18 +182,21 @@ if (!empty($sanphamCT)): ?>
                     <div class="col-md-6">
                         <h4 class="mb-3">Thêm bình luận mới</h4>
 
-                        <form action="<?= '?act=add-binh-luan&id=' . $sanphamCT['id'] ?>" method="POST"> <!-- Trỏ đến file xử lý -->
-                            <div class="form-group">
-                                <label for="Content">Nội dung bình luận:</label>
-                                <textarea name="Content" id="Content" class="form-control" rows="4" placeholder="Nhập nội dung bình luận..." required></textarea>
-                            </div>
-                            <!-- ID người dùng (ẩn, lấy từ phiên đăng nhập) -->
-                            <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
-
-                            <!-- ID sản phẩm (ẩn) -->
-                            <input type="hidden" name="comics_id" value="<?= $sanphamCT['id'] ?>">
-                            <button type="submit" class="btn btn-primary">Gửi bình luận</button>
-                        </form>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <form action="<?= '?act=add-binh-luan&id=' . $sanphamCT['id'] ?>" method="POST">
+                                <div class="form-group">
+                                    <label for="Content">Nội dung bình luận:</label>
+                                    <textarea name="Content" id="Content" class="form-control" rows="4" placeholder="Nhập nội dung bình luận..." required></textarea>
+                                </div>
+                                <!-- ID người dùng (ẩn, lấy từ phiên đăng nhập) -->
+                                <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+                                <!-- ID sản phẩm (ẩn) -->
+                                <input type="hidden" name="comics_id" value="<?= $sanphamCT['id'] ?>">
+                                <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+                            </form>
+                        <?php else: ?>
+                            <p>Vui lòng <a href="index.php?act=login" class="text-primary">đăng nhập</a> để bình luận.</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -269,31 +272,37 @@ if (!empty($sanphamCT)): ?>
                     </div>
 
                     <!-- Form đánh giá sản phẩm -->
-                    <div class="col-md-6">
-                        <h4 class="mb-3">Thêm đánh giá mới</h4>
-                        <form action="<?= '?act=add-danh-gia&id=' . $sanphamCT['id'] ?>" method="POST">
-                            <div class="form-group">
-                                <label for="rating">Đánh giá:</label>
-                                <select name="rating" id="rating" class="form-control" required>
-                                    <option value="">Chọn mức đánh giá</option>
-                                    <option value="very_bad">Rất tệ</option>
-                                    <option value="bad">Tệ</option>
-                                    <option value="average">Trung bình</option>
-                                    <option value="good">Tốt</option>
-                                    <option value="excellent">Xuất sắc</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="review_text">Nội dung đánh giá:</label>
-                                <textarea name="review_text" id="review_text" class="form-control" rows="4" placeholder="Nhập nội dung đánh giá..." required></textarea>
-                            </div>
-                            <!-- ID người dùng (ẩn, lấy từ phiên đăng nhập) -->
-                            <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
-                            <!-- ID sản phẩm (ẩn) -->
-                            <input type="hidden" name="comic_id" value="<?= $sanphamCT['id'] ?>">
-                            <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
-                        </form>
-                    </div>
+                   <!-- Form đánh giá sản phẩm -->
+<div class="col-md-6">
+    <h4 class="mb-3">Thêm đánh giá mới</h4>
+
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <form action="<?= '?act=add-danh-gia&id=' . $sanphamCT['id'] ?>" method="POST">
+            <div class="form-group">
+                <label for="rating">Đánh giá:</label>
+                <select name="rating" id="rating" class="form-control" required>
+                    <option value="">Chọn mức đánh giá</option>
+                    <option value="very_bad">Rất tệ</option>
+                    <option value="bad">Tệ</option>
+                    <option value="average">Trung bình</option>
+                    <option value="good">Tốt</option>
+                    <option value="excellent">Xuất sắc</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="review_text">Nội dung đánh giá:</label>
+                <textarea name="review_text" id="review_text" class="form-control" rows="4" placeholder="Nhập nội dung đánh giá..." required></textarea>
+            </div>
+            <!-- ID người dùng (ẩn, lấy từ phiên đăng nhập) -->
+            <input type="hidden" name="user_id" value="<?= $_SESSION['user_id'] ?>">
+            <!-- ID sản phẩm (ẩn) -->
+            <input type="hidden" name="comic_id" value="<?= $sanphamCT['id'] ?>">
+            <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+        </form>
+    <?php else: ?>
+        <p>Vui lòng <a href="index.php?act=login" class="text-primary">đăng nhập</a> để đánh giá.</p>
+    <?php endif; ?>
+</div>
                 </div>
             </div>
         </div>

@@ -1,18 +1,4 @@
-
-<div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-              <div class="container-fluid">
-                <div class="row mb-2">
-                  <div class="col-sm-6">
-                    <h3>Quản lí đơn hàng</h3>
-                  </div>
-                </div>
-              </div><!-- /.container-fluid -->
-            </section>
-          
-            <!-- Main content -->
-            <section class="content">
+<div class="page-wrapper">
               
           
                     <div class="card">
@@ -162,7 +148,7 @@
                 <!-- /.row -->
               </div>
               <!-- /.container-fluid -->
-            </section>
+         
             <!-- /.content -->
           </div>
           <!-- /.content-wrapper -->

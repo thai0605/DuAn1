@@ -1,8 +1,4 @@
-<div class="content-wrapper">
-    <section class="content-header">
-        <h1>Cập nhật đơn hàng</h1>
-    </section>
-    <section class="content">
+<div class="page-wrapper">
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
@@ -74,5 +70,5 @@
                 </div>
             </div>
         </div>
-    </section>
+  
 </div>
