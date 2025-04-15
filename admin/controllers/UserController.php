@@ -73,7 +73,7 @@ class UserController
             exit();
         }
     
-        require_once './views/user/edituser.php';
+        require_once './views/user/chitietuser.php';
     }
     
 
