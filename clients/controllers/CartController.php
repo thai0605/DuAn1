@@ -61,7 +61,7 @@ class CartController
           if ($this->cartModel->updateQuantity($itemId, $quantity, $userId)) {
               $_SESSION['message'] = 'Cập nhật số lượng thành công!';
           } else {
-              $_SESSION['error'] = 'Không thể cập nhật số lượng!';
+              $_SESSION['error'] = 'Số lượng vượt quá số lượng có sẵn trong kho!';
           }
   
           header('Location: ?act=view-shopping-cart');

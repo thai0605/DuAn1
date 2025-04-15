@@ -4,12 +4,14 @@
 class User {
     public $name;
     public $email;
+    public $phone;
     private $pdo;
 
     // Khởi tạo với dữ liệu người dùng và kết nối CSDL
     public function __construct($data, $pdo = null) {
         $this->name = $data['name'];
         $this->email = $data['email'];
+        $this->phone = $data['phone'];
         $this->pdo = $pdo;
     }
 

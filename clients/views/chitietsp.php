@@ -92,7 +92,7 @@ if (!empty($sanphamCT)): ?>
                         <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
                     </button>
                 <?php else: ?>
-                    <div class="alert alert-warning mb-0">Out of stock</div>
+                    <div class="alert alert-warning mb-0">Hết Hàng</div>
                 <?php endif; ?>
             </form>
             <form action="?act=checkout" method="POST" style="display: inline;" onsubmit="return validateBeforeCheckout()">

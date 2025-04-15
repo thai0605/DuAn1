@@ -14,6 +14,7 @@ class CheckoutController {
             header('Location: ?act=login');
             exit;
         }
+    
         $userId = $_SESSION['user']['id'];
         
         // Xử lý mua ngay
@@ -28,24 +29,32 @@ class CheckoutController {
             ];
             
             $_SESSION['buy_now_item'] = $buyNowItem;
+            $isBuyNow = true;
             require_once './clients/views/checkout/thanhtoan.php';
             return;
         }
- // Xử lý giỏ hàng thông thường
- $cartItems = $this->cartModel->getCartItems($userId);
- if (empty($cartItems)) {
-     $_SESSION['error'] = "Giỏ hàng trống";
-     header('Location: ?act=view-shopping-cart');
-     exit;
- }
- 
- $totalAmount = 0;
- foreach ($cartItems as $item) {
-     $totalAmount += $item['price'] * $item['quantity'];
- }
 
- require_once './clients/views/checkout/thanhtoan.php';
-}
+        if (isset($_SESSION['buy_now_item'])) {
+            unset($_SESSION['buy_now_item']);
+        }
+    
+        // Xử lý giỏ hàng thông thường
+        $cartItems = $this->cartModel->getCartItems($userId);
+        if (empty($cartItems)) {
+            $_SESSION['error'] = "Giỏ hàng trống";
+            header('Location: ?act=view-shopping-cart');
+            exit;
+        }
+    
+        $totalAmount = 0;
+        foreach ($cartItems as $item) {
+            $totalAmount += $item['price'] * $item['quantity'];
+        }
+    
+        $isBuyNow = false;
+        require_once './clients/views/checkout/thanhtoan.php';
+    }
+    
 public function processCheckout() {
     try {
         if (!isset($_SESSION['user'])) {

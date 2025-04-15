@@ -13,16 +13,17 @@
 
     <?php if (isset($_SESSION['message'])): ?>
         <div class="alert alert-success">
-            <?= $_SESSION['message']; unset($_SESSION['message']); ?>
+            <?= $_SESSION['message'];
+            unset($_SESSION['message']); ?>
         </div>
     <?php endif; ?>
 
     <?php if (isset($_SESSION['error'])): ?>
         <div class="alert alert-danger">
-            <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+            <?= $_SESSION['error'];
+            unset($_SESSION['error']); ?>
         </div>
     <?php endif; ?>
-
     <main class="main">
         <div class="container mt-4">
             <h2 class="text-center mb-4">Giỏ hàng của bạn</h2>
@@ -54,20 +55,32 @@
                                     </td>
                                     <td><?= $item['title'] ?></td>
                                     <td class="text-right"><?= number_format($item['price'], 0, ',', '.') ?>đ</td>
-                                    <td class="text-center" style="width: 150px;">
-                                        <div class="input-group">
-                                            <span class="input-group-prepend">
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="updateQuantity(<?= $item['id'] ?>, -1)">
-                                                    <i class="fas fa-minus"></i>
-                                                </button>
-                                            </span>
-                                            <input type="text" class="form-control form-control-sm text-center quantity-input" data-item-id="<?= $item['id'] ?>" value="<?= $item['quantity'] ?>" min="1" max="99" onchange="saveQuantity(<?= $item['id'] ?>)">
-                                            <span class="input-group-append">
-                                                <button type="button" class="btn btn-danger btn-sm" onclick="updateQuantity(<?= $item['id'] ?>, 1)">
-                                                    <i class="fas fa-plus"></i>
-                                                </button>
-                                            </span>
-                                        </div>
+                                    <td class="text-center" style="width: 180px;">
+                                        <form method="POST" action="?act=update-quantity" class="d-flex justify-content-center align-items-center gap-1">
+                                            <input type="hidden" name="item_id" value="<?= $item['id'] ?>">
+                                            <div class="input-group" style="max-width: 120px;">
+                                                <span class="input-group-prepend">
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="changeQuantity(this, -1)">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                </span>
+                                                <input type="number"
+                                                    class="form-control form-control-sm text-center quantity-input"
+                                                    name="quantity"
+                                                    min="1"
+                                                    max="<?= $item['stock_quantity'] ?>"
+                                                    value="<?= $item['quantity'] ?>"
+                                                    data-item-id="<?= $item['id'] ?>">
+                                                <span class="input-group-append">
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="changeQuantity(this, 1)">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                     <td class="text-right item-total" id="subtotal-<?= $item['id'] ?>">
                                         <?= number_format($item['price'] * $item['quantity'], 0, ',', '.') ?>đ
@@ -200,15 +213,11 @@
 
         function updateQuantity(itemId, change) {
             const input = document.querySelector(`.quantity-input[data-item-id="${itemId}"]`);
+            const maxQuantity = parseInt(input.getAttribute("data-max-quantity")); // Lấy maxQuantity từ HTML
             let newQuantity = parseInt(input.value) + change;
 
-            // Đảm bảo số lượng không nhỏ hơn 1 và không lớn hơn 99
-            if (newQuantity < 1) {
-                newQuantity = 1;
-            }
-            if (newQuantity > 99) {
-                newQuantity = 99;
-            }
+            if (newQuantity < 1) newQuantity = 1;
+            if (newQuantity > maxQuantity) newQuantity = maxQuantity;
 
             input.value = newQuantity;
             saveQuantity(itemId);
@@ -264,9 +273,28 @@
             });
         }
 
+        function changeQuantity(button, change) {
+            const input = button.closest('.input-group').querySelector('.quantity-input');
+            const maxQuantity = parseInt(input.getAttribute('max'));
+            let newQuantity = parseInt(input.value) + change;
+
+            if (newQuantity < 1) newQuantity = 1;
+            if (newQuantity > maxQuantity) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Thông báo',
+                    text: 'Số lượng vượt quá số lượng có sẵn trong kho!',
+                    confirmButtonColor: '#e53637'
+                });
+                newQuantity = maxQuantity;
+            }
+
+            input.value = newQuantity;
+        }
+
         function toggleAll(source) {
             const checkboxes = document.getElementsByClassName('item-checkbox');
-            for(let checkbox of checkboxes) {
+            for (let checkbox of checkboxes) {
                 checkbox.checked = source.checked;
             }
             updateTotal();
@@ -277,21 +305,31 @@
             const checkboxes = document.getElementsByClassName('item-checkbox');
             let selectedItems = [];
 
-            for(let checkbox of checkboxes) {
-                if(checkbox.checked) {
+            for (let checkbox of checkboxes) {
+                if (checkbox.checked) {
                     const row = checkbox.closest('tr');
                     const itemId = row.id.replace('cart-item-', '');
-                    
-                    // Thêm thông tin chi tiết của sản phẩm được chọn
+                    const quantity = parseInt(row.querySelector('.quantity-input').value);
+                    const maxQuantity = parseInt(row.querySelector('.quantity-input').getAttribute('max'));
+
+                    if (quantity > maxQuantity) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Thông báo',
+                            text: `Số lượng sản phẩm vượt quá số lượng có sẵn trong kho! (Tối đa: ${maxQuantity})`,
+                            confirmButtonColor: '#e53637'
+                        });
+                        return false;
+                    }
+
                     selectedItems.push({
                         id: itemId,
-                        quantity: parseInt(checkbox.getAttribute('data-quantity')),
-                        price: parseFloat(checkbox.getAttribute('data-price'))
+                        quantity: quantity
                     });
                 }
             }
 
-            if(selectedItems.length === 0) {
+            if (selectedItems.length === 0) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Thông báo',
@@ -306,41 +344,43 @@
             form.method = 'POST';
             form.action = '?act=checkout';
 
-            // Thêm input ẩn chứa thông tin sản phẩm đã chọn
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'selected_items';
             input.value = JSON.stringify(selectedItems);
             form.appendChild(input);
 
-            console.log('Selected Items:', selectedItems); // Để debug
             document.body.appendChild(form);
             form.submit();
         }
 
         function updateTotal() {
-            let total = 0;
-            const checkboxes = document.getElementsByClassName('item-checkbox');
-            const checkoutBtn = document.getElementById('checkout-btn');
-            let hasCheckedItems = false;
+    let total = 0;
+    const checkboxes = document.getElementsByClassName('item-checkbox');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    let hasCheckedItems = false;
 
-            for(let checkbox of checkboxes) {
-                if(checkbox.checked) {
-                    hasCheckedItems = true;
-                    const price = parseFloat(checkbox.getAttribute('data-price'));
-                    const quantity = parseInt(checkbox.getAttribute('data-quantity'));
-                    total += price * quantity;
-                }
-            }
-
-            // Cập nhật tổng tiền
-            document.getElementById('cart-total').innerHTML = 
-                `<strong>${hasCheckedItems ? new Intl.NumberFormat('vi-VN').format(total) : '0'}đ</strong>`;
-
-            // Cập nhật trạng thái nút thanh toán
-            checkoutBtn.style.opacity = hasCheckedItems ? '1' : '0.5';
-            checkoutBtn.disabled = !hasCheckedItems;
+    for (let checkbox of checkboxes) {
+        if (checkbox.checked) {
+            const price = parseFloat(checkbox.getAttribute('data-price'));
+            const quantity = parseInt(checkbox.getAttribute('data-quantity'));
+            total += price * quantity;
+            hasCheckedItems = true; // ✅ Thêm dòng này
         }
+    }
+
+    // Cập nhật tổng tiền
+    document.getElementById('cart-total').innerHTML =
+        `<strong>${hasCheckedItems ? new Intl.NumberFormat('vi-VN').format(total) : '0'}đ</strong>`;
+
+    // Cập nhật trạng thái nút thanh toán
+    checkoutBtn.style.opacity = hasCheckedItems ? '1' : '0.5';
+    checkoutBtn.disabled = !hasCheckedItems;
+}
+
+// Gọi lại sau khi trang tải xong
+document.addEventListener('DOMContentLoaded', updateTotal);
+
     </script>
 
     <style>

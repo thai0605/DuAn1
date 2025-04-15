@@ -191,19 +191,67 @@
     </style>
 </head>
 <body>
-    <div class="checkout-container">
-        <div class="checkout-header">
-            <h2 class="mb-4">Thanh toán đơn hàng</h2>
+
+<div class="checkout-container">
+    <div class="checkout-header">
+        <h2 class="mb-4">Thanh toán đơn hàng</h2>
+    </div>
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+    <?php endif; ?>
 
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?= $_SESSION['error']; unset($_SESSION['error']); ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="checkout-content">
+        <?php if (isset($_SESSION['buy_now_item'])): ?>
+            <!-- Hiển thị thông tin "Mua ngay" -->
+            <?php $item = $_SESSION['buy_now_item']; ?>
+            <div class="card mb-3">
+                <div class="row g-0 align-items-center">
+                    <div class="col-md-2 text-center">
+                        <img src="<?= removeFirstChar($item['image']) ?>" class="img-fluid rounded-start" alt="<?= $item['title'] ?>">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($item['title']) ?></h5>
+                            <p class="card-text">Giá: <?= number_format($item['price'], 0, ',', '.') ?>đ</p>
+                            <p class="card-text">Số lượng: <?= $item['quantity'] ?></p>
+                            <p class="card-text"><strong>Tổng cộng: <?= number_format($item['total_amount'], 0, ',', '.') ?>đ</strong></p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        <?php elseif (empty($cartItems)): ?>
+            <!-- Hiển thị thông tin giỏ hàng -->
+            <?php foreach ($cartItems as $item): ?>
+                <div class="card mb-3">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-md-2 text-center">
+                            <img src="<?= removeFirstChar($item['image']) ?>" class="img-fluid rounded-start" alt="<?= $item['title'] ?>">
+                        </div>
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= htmlspecialchars($item['title']) ?></h5>
+                                <p class="card-text">Giá: <?= number_format($item['price'], 0, ',', '.') ?>đ</p>
+                                <p class="card-text">Số lượng: <?= $item['quantity'] ?></p>
+                                <p class="card-text"><strong>Thành tiền: <?= number_format($item['price'] * $item['quantity'], 0, ',', '.') ?>đ</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="text-end">
+                <h5><strong>Tổng tiền thanh toán: <?= number_format($totalAmount, 0, ',', '.') ?>đ</strong></h5>
+            </div>
+        <?php else: ?>
+           
         <?php endif; ?>
+    </div>
 
-        <div class="checkout-content">
+    <!-- Thêm form thanh toán tại đây nếu cần -->
+    <div class="checkout-content">
             <!-- Form thanh toán -->
             <div class="checkout-form">
                 <div class="card mb-4">
@@ -234,7 +282,6 @@
                                 <select class="form-select" id="payment-method" name="payment_method" required>
                                     <option value="">Chọn phương thức thanh toán</option>
                                     <option value="COD">Thanh toán khi nhận hàng</option>
-                                    <option value="CREDIT">Thẻ tín dụng</option>
                                     <option value="BANKING">Chuyển khoản ngân hàng</option>
                                     <option value="MOMO">Ví MoMo</option>
                                 </select>
@@ -559,7 +606,9 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
