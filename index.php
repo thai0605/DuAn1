@@ -16,6 +16,7 @@ require_once './clients/controllers/HomeController.php';
 require_once './clients/controllers/OrderController.php';
 require_once './clients/controllers/CartController.php';
 require_once './clients/controllers/CheckoutController.php';
+require_once './clients/controllers/PaymentController.php';
 
 require_once './clients/models/banner.php';
 require_once './clients/models/danhmuc.php';
@@ -26,6 +27,7 @@ require_once './clients/models/Account.php';
 require_once './clients/models/order.php';
 require_once './clients/models/Cart.php';
 require_once './clients/models/OrderList.php';
+require_once './clients/models/MoMoPayment.php';
 
 
 $act = $_GET['act'] ?? '/';
@@ -54,6 +56,8 @@ match ($act) {
     'process-checkout' => (new CheckoutController())->processCheckout(),
     'checkout' => (new CheckoutController())->index(),
     'order-success' => (new CheckoutController())->orderSuccess(),
+    'index-momo' => (new CheckoutController())->indexMomo(),
+    'process-momo-payment' => (new PaymentController())->processMomoPayment(),
 
     // đăng nhập đăng ký
     'login' => (new LoginController())->login(),

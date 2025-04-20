@@ -76,6 +76,7 @@
      </button>
       
      <a href="?act=order" class="btn btn-success btn-sm">Quay lại</a>
+     <a href="?act=edit-order&id=<?= $order['id'] ?>" class="btn btn-warning btn-sm">Cập Nhật</a>
 
  
 
