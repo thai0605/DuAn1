@@ -115,11 +115,15 @@ class OrderController{
             }
         }
 
-        // Kiểm tra trạng thái đơn hàng đã hoàn thành/hủy
-        if ($currentOrder['shipping_status'] === 'returned' || 
-            $currentOrder['shipping_status'] === 'cancelled') {
-            if ($data[':shipping_status'] !== $currentOrder['shipping_status']) {
-                throw new Exception("Không thể thay đổi trạng thái của đơn hàng đã hoàn thành/hủy");
+        if (in_array($currentOrder['shipping_status'], ['returned', 'cancelled'])) {
+            // Chặn thay đổi shipping_status
+            if (isset($data[':shipping_status']) && $data[':shipping_status'] !== $currentOrder['shipping_status']) {
+                throw new Exception("Không thể thay đổi trạng thái giao hàng của đơn hàng đã hoàn thành/hủy");
+            }
+        
+            // Nếu đơn hàng bị hủy, payment_status phải là 'failed'
+            if ($currentOrder['shipping_status'] === 'cancelled') {
+                $data[':payment_status'] = 'failed'; // ép trạng thái thanh toán về thất bại
             }
         }
 
