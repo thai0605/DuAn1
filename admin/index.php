@@ -64,6 +64,8 @@ require_once './controllers/AuthController.php';
 require_once './controllers/GiaodienController.php';
 require_once './controllers/KhuyenMaiController.php';
 require_once './controllers/OrderController.php';
+require_once './controllers/BinhluanController.php';
+
 
 require_once './models/User.php';
 require_once './models/VariantSanPham.php';
@@ -74,6 +76,8 @@ require_once './models/AuthModel.php';
 require_once './models/AdminBanner.php';
 require_once './models/KhuyenMai.php';
 require_once './models/Order.php';
+require_once './models/AdminBinhluan.php';
+
 
 $home = new HomeController();
 $khuyenmai = new KhuyenMaiController();

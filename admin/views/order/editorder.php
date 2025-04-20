@@ -1,3 +1,4 @@
+<div class="page-wrapper p-4">
 <div class="content-wrapper">
     <section class="content-header">
         <h1>Cập nhật đơn hàng</h1>
@@ -46,7 +47,6 @@
                                 <select class="form-control" name="payment_status">
                                     <option value="unpaid" <?php echo $order['payment_status'] == 'unpaid' ? 'selected' : ''; ?>>Chưa thanh toán</option>
                                     <option value="paid" <?php echo $order['payment_status'] == 'paid' ? 'selected' : ''; ?>>Đã thanh toán</option>
-                                    <option value="refunded" <?php echo $order['payment_status'] == 'refunded' ? 'selected' : ''; ?>>Hoàn tiền</option>
                                     <option value="failed" <?php echo $order['payment_status'] == 'failed' ? 'selected' : ''; ?>>Thất bại</option>
                                     <option value="processing" <?php echo $order['payment_status'] == 'processing' ? 'selected' : ''; ?>>Đang xử lý</option>
                                 </select>
@@ -75,4 +75,5 @@
             </div>
         </div>
     </section>
+</div>
 </div>

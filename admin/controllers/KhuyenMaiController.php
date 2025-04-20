@@ -164,32 +164,29 @@ class KhuyenMaiController
         if ($status == 'active') {
             if ($today < $start_date) {
                 $_SESSION['error'] = 'Không thể kích hoạt khuyến mãi trước ngày bắt đầu';
-                header('location: ?act=form-edit-khuyen-mai&id='.$id);
+                header('location: ?act=form-edit-khuyen-mai&id=' . $id);
                 exit();
             }
             if ($today > $end_date) {
                 $_SESSION['error'] = 'Không thể kích hoạt khuyến mãi đã hết hạn';
-                header('location: ?act=form-edit-khuyen-mai&id='.$id);
+                header('location: ?act=form-edit-khuyen-mai&id=' . $id);
                 exit();
             }
         } elseif ($status == 'inactive') { 
             if ($today < $start_date) {
                 $_SESSION['error'] = 'Không thể đánh dấu hết hạn khi chưa đến thời gian khuyến mãi';
-                header('location: ?act=form-edit-khuyen-mai&id='.$id);
+                header('location: ?act=form-edit-khuyen-mai&id=' . $id);
                 exit();
             }
-            if ($today <= $end_date) {
-                $_SESSION['error'] = 'Không thể đánh dấu hết hạn khi khuyến mãi vẫn còn hiệu lực';
-                header('location: ?act=form-edit-khuyen-mai&id='.$id);
-                exit();
-            }
+            // Cho phép set 'inactive' trong suốt khoảng thời gian còn hiệu lực
         } elseif ($status == 'pending') {
             if ($today >= $start_date) {
                 $_SESSION['error'] = 'Không thể đặt trạng thái chờ khi đã đến hoặc qua ngày bắt đầu';
-                header('location: ?act=form-edit-khuyen-mai&id='.$id);
+                header('location: ?act=form-edit-khuyen-mai&id=' . $id);
                 exit();
             }
         }
+        
 
         // Thêm kiểm tra trùng lặp, loại trừ khuyến mãi hiện tại
         if ($this->modelKhuyenMai->checkExistingPromotion($comic_id, $start_date, $end_date, $id)) {
